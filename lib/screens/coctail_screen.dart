@@ -23,15 +23,13 @@ class CoctailScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height - 200,
+          Expanded(
             child: BlocBuilder<DrinkCubit, DrinkState>(
               builder: (context, state) => state.when(
                 drinkLoading: () =>
                     const Center(child: CircularProgressIndicator()),
                 drinkLoadFailure: (e) => Text(e),
-                drinkLoadSuccess: (data) => DisplayDrinkWidget(
+                drinkLoadSuccess: (data) => DisplayDrinks(
                   drinksData: data,
                 ),
               ),
@@ -54,8 +52,8 @@ class CoctailScreen extends StatelessWidget {
   }
 }
 
-class DisplayDrinkWidget extends StatelessWidget {
-  const DisplayDrinkWidget({Key? key, required DrinksData drinksData})
+class DisplayDrinks extends StatelessWidget {
+  const DisplayDrinks({Key? key, required DrinksData drinksData})
       : _drinksData = drinksData,
         super(key: key);
 
@@ -63,14 +61,18 @@ class DisplayDrinkWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: _drinksData.drinks?.length,
-      itemBuilder: (context, index) {
-        return CoctailCard(
-            strDrink: _drinksData.drinks?[index].strDrink ?? 'Drinks Name',
-            strImageSource: _drinksData.drinks?[index].strImageSource ??
-                'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
-      },
+    return RefreshIndicator(
+      onRefresh: () => context.read<DrinkCubit>().fetchDrinks(),
+      child: ListView.builder(
+        itemCount: _drinksData.drinks?.length,
+        itemBuilder: (context, index) {
+          print(_drinksData.drinks?[index].strImageSource);
+          return CoctailCard(
+              strDrink: _drinksData.drinks?[index].strDrink ?? 'Drinks Name',
+              strImageSource: _drinksData.drinks?[index].strDrinkThumb ??
+                  'https://c.pxhere.com/images/f4/05/58efa5e8778a37e56bafdf192118-1593200.jpg!d');
+        },
+      ),
     );
   }
 }
