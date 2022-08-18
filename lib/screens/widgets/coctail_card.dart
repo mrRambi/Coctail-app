@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class CoctailCard extends StatelessWidget {
   final String strDrink;
-  final String strImageSource;
+  final String strDrinkThumb;
   const CoctailCard({
     Key? key,
     required this.strDrink,
-    required this.strImageSource,
+    required this.strDrinkThumb,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class CoctailCard extends StatelessWidget {
             Colors.black.withOpacity(0.35),
             BlendMode.multiply,
           ),
-          image: NetworkImage(strImageSource),
+          image: NetworkImage(strDrinkThumb),
           fit: BoxFit.cover,
         ),
       ),

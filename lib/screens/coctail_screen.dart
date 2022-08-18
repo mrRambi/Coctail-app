@@ -69,7 +69,7 @@ class DisplayDrinks extends StatelessWidget {
           print(_drinksData.drinks?[index].strImageSource);
           return CoctailCard(
               strDrink: _drinksData.drinks?[index].strDrink ?? 'Drinks Name',
-              strImageSource: _drinksData.drinks?[index].strDrinkThumb ??
+              strDrinkThumb: _drinksData.drinks?[index].strDrinkThumb ??
                   'https://c.pxhere.com/images/f4/05/58efa5e8778a37e56bafdf192118-1593200.jpg!d');
         },
       ),
