@@ -22,60 +22,60 @@ Drink _$DrinkFromJson(Map<String, dynamic> json) {
 mixin _$Drink {
   String? get idDrink => throw _privateConstructorUsedError;
   String? get strDrink => throw _privateConstructorUsedError;
-  dynamic get strDrinkAlternate => throw _privateConstructorUsedError;
-  dynamic get strTags => throw _privateConstructorUsedError;
-  dynamic get strVideo => throw _privateConstructorUsedError;
+  String? get strDrinkAlternate => throw _privateConstructorUsedError;
+  String? get strTags => throw _privateConstructorUsedError;
+  String? get strVideo => throw _privateConstructorUsedError;
   String? get strCategory => throw _privateConstructorUsedError;
   @JsonKey(name: 'strIBA')
-  dynamic get strIba => throw _privateConstructorUsedError;
+  String? get strIba => throw _privateConstructorUsedError;
   String? get strAlcoholic => throw _privateConstructorUsedError;
   String? get strGlass => throw _privateConstructorUsedError;
   String? get strInstructions => throw _privateConstructorUsedError;
   @JsonKey(name: 'strInstructionsES')
-  dynamic get strInstructionsEs => throw _privateConstructorUsedError;
+  String? get strInstructionsEs => throw _privateConstructorUsedError;
   @JsonKey(name: 'strInstructionsDE')
   String? get strInstructionsDe => throw _privateConstructorUsedError;
   @JsonKey(name: 'strInstructionsFR')
-  dynamic get strInstructionsFr => throw _privateConstructorUsedError;
+  String? get strInstructionsFr => throw _privateConstructorUsedError;
   @JsonKey(name: 'strInstructionsIT')
   String? get strInstructionsIt => throw _privateConstructorUsedError;
   @JsonKey(name: 'strInstructionsZH-HANS')
-  dynamic get strInstructionsZhHans => throw _privateConstructorUsedError;
+  String? get strInstructionsZhHans => throw _privateConstructorUsedError;
   @JsonKey(name: 'strInstructionsZH-HANT')
-  dynamic get strInstructionsZhHant => throw _privateConstructorUsedError;
+  String? get strInstructionsZhHant => throw _privateConstructorUsedError;
   String? get strDrinkThumb => throw _privateConstructorUsedError;
   String? get strIngredient1 => throw _privateConstructorUsedError;
   String? get strIngredient2 => throw _privateConstructorUsedError;
   String? get strIngredient3 => throw _privateConstructorUsedError;
   String? get strIngredient4 => throw _privateConstructorUsedError;
-  dynamic get strIngredient5 => throw _privateConstructorUsedError;
-  dynamic get strIngredient6 => throw _privateConstructorUsedError;
-  dynamic get strIngredient7 => throw _privateConstructorUsedError;
-  dynamic get strIngredient8 => throw _privateConstructorUsedError;
-  dynamic get strIngredient9 => throw _privateConstructorUsedError;
-  dynamic get strIngredient10 => throw _privateConstructorUsedError;
-  dynamic get strIngredient11 => throw _privateConstructorUsedError;
-  dynamic get strIngredient12 => throw _privateConstructorUsedError;
-  dynamic get strIngredient13 => throw _privateConstructorUsedError;
-  dynamic get strIngredient14 => throw _privateConstructorUsedError;
-  dynamic get strIngredient15 => throw _privateConstructorUsedError;
+  String? get strIngredient5 => throw _privateConstructorUsedError;
+  String? get strIngredient6 => throw _privateConstructorUsedError;
+  String? get strIngredient7 => throw _privateConstructorUsedError;
+  String? get strIngredient8 => throw _privateConstructorUsedError;
+  String? get strIngredient9 => throw _privateConstructorUsedError;
+  String? get strIngredient10 => throw _privateConstructorUsedError;
+  String? get strIngredient11 => throw _privateConstructorUsedError;
+  String? get strIngredient12 => throw _privateConstructorUsedError;
+  String? get strIngredient13 => throw _privateConstructorUsedError;
+  String? get strIngredient14 => throw _privateConstructorUsedError;
+  String? get strIngredient15 => throw _privateConstructorUsedError;
   String? get strMeasure1 => throw _privateConstructorUsedError;
   String? get strMeasure2 => throw _privateConstructorUsedError;
   String? get strMeasure3 => throw _privateConstructorUsedError;
-  dynamic get strMeasure4 => throw _privateConstructorUsedError;
-  dynamic get strMeasure5 => throw _privateConstructorUsedError;
-  dynamic get strMeasure6 => throw _privateConstructorUsedError;
-  dynamic get strMeasure7 => throw _privateConstructorUsedError;
-  dynamic get strMeasure8 => throw _privateConstructorUsedError;
-  dynamic get strMeasure9 => throw _privateConstructorUsedError;
-  dynamic get strMeasure10 => throw _privateConstructorUsedError;
-  dynamic get strMeasure11 => throw _privateConstructorUsedError;
-  dynamic get strMeasure12 => throw _privateConstructorUsedError;
-  dynamic get strMeasure13 => throw _privateConstructorUsedError;
-  dynamic get strMeasure14 => throw _privateConstructorUsedError;
-  dynamic get strMeasure15 => throw _privateConstructorUsedError;
-  dynamic get strImageSource => throw _privateConstructorUsedError;
-  dynamic get strImageAttribution => throw _privateConstructorUsedError;
+  String? get strMeasure4 => throw _privateConstructorUsedError;
+  String? get strMeasure5 => throw _privateConstructorUsedError;
+  String? get strMeasure6 => throw _privateConstructorUsedError;
+  String? get strMeasure7 => throw _privateConstructorUsedError;
+  String? get strMeasure8 => throw _privateConstructorUsedError;
+  String? get strMeasure9 => throw _privateConstructorUsedError;
+  String? get strMeasure10 => throw _privateConstructorUsedError;
+  String? get strMeasure11 => throw _privateConstructorUsedError;
+  String? get strMeasure12 => throw _privateConstructorUsedError;
+  String? get strMeasure13 => throw _privateConstructorUsedError;
+  String? get strMeasure14 => throw _privateConstructorUsedError;
+  String? get strMeasure15 => throw _privateConstructorUsedError;
+  String? get strImageSource => throw _privateConstructorUsedError;
+  String? get strImageAttribution => throw _privateConstructorUsedError;
   String? get strCreativeCommonsConfirmed => throw _privateConstructorUsedError;
   String? get dateModified => throw _privateConstructorUsedError;
 
@@ -91,53 +91,53 @@ abstract class $DrinkCopyWith<$Res> {
   $Res call(
       {String? idDrink,
       String? strDrink,
-      dynamic strDrinkAlternate,
-      dynamic strTags,
-      dynamic strVideo,
+      String? strDrinkAlternate,
+      String? strTags,
+      String? strVideo,
       String? strCategory,
-      @JsonKey(name: 'strIBA') dynamic strIba,
+      @JsonKey(name: 'strIBA') String? strIba,
       String? strAlcoholic,
       String? strGlass,
       String? strInstructions,
-      @JsonKey(name: 'strInstructionsES') dynamic strInstructionsEs,
+      @JsonKey(name: 'strInstructionsES') String? strInstructionsEs,
       @JsonKey(name: 'strInstructionsDE') String? strInstructionsDe,
-      @JsonKey(name: 'strInstructionsFR') dynamic strInstructionsFr,
+      @JsonKey(name: 'strInstructionsFR') String? strInstructionsFr,
       @JsonKey(name: 'strInstructionsIT') String? strInstructionsIt,
-      @JsonKey(name: 'strInstructionsZH-HANS') dynamic strInstructionsZhHans,
-      @JsonKey(name: 'strInstructionsZH-HANT') dynamic strInstructionsZhHant,
+      @JsonKey(name: 'strInstructionsZH-HANS') String? strInstructionsZhHans,
+      @JsonKey(name: 'strInstructionsZH-HANT') String? strInstructionsZhHant,
       String? strDrinkThumb,
       String? strIngredient1,
       String? strIngredient2,
       String? strIngredient3,
       String? strIngredient4,
-      dynamic strIngredient5,
-      dynamic strIngredient6,
-      dynamic strIngredient7,
-      dynamic strIngredient8,
-      dynamic strIngredient9,
-      dynamic strIngredient10,
-      dynamic strIngredient11,
-      dynamic strIngredient12,
-      dynamic strIngredient13,
-      dynamic strIngredient14,
-      dynamic strIngredient15,
+      String? strIngredient5,
+      String? strIngredient6,
+      String? strIngredient7,
+      String? strIngredient8,
+      String? strIngredient9,
+      String? strIngredient10,
+      String? strIngredient11,
+      String? strIngredient12,
+      String? strIngredient13,
+      String? strIngredient14,
+      String? strIngredient15,
       String? strMeasure1,
       String? strMeasure2,
       String? strMeasure3,
-      dynamic strMeasure4,
-      dynamic strMeasure5,
-      dynamic strMeasure6,
-      dynamic strMeasure7,
-      dynamic strMeasure8,
-      dynamic strMeasure9,
-      dynamic strMeasure10,
-      dynamic strMeasure11,
-      dynamic strMeasure12,
-      dynamic strMeasure13,
-      dynamic strMeasure14,
-      dynamic strMeasure15,
-      dynamic strImageSource,
-      dynamic strImageAttribution,
+      String? strMeasure4,
+      String? strMeasure5,
+      String? strMeasure6,
+      String? strMeasure7,
+      String? strMeasure8,
+      String? strMeasure9,
+      String? strMeasure10,
+      String? strMeasure11,
+      String? strMeasure12,
+      String? strMeasure13,
+      String? strMeasure14,
+      String? strMeasure15,
+      String? strImageSource,
+      String? strImageAttribution,
       String? strCreativeCommonsConfirmed,
       String? dateModified});
 }
@@ -216,15 +216,15 @@ class _$DrinkCopyWithImpl<$Res> implements $DrinkCopyWith<$Res> {
       strDrinkAlternate: strDrinkAlternate == freezed
           ? _value.strDrinkAlternate
           : strDrinkAlternate // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strTags: strTags == freezed
           ? _value.strTags
           : strTags // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strVideo: strVideo == freezed
           ? _value.strVideo
           : strVideo // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strCategory: strCategory == freezed
           ? _value.strCategory
           : strCategory // ignore: cast_nullable_to_non_nullable
@@ -232,7 +232,7 @@ class _$DrinkCopyWithImpl<$Res> implements $DrinkCopyWith<$Res> {
       strIba: strIba == freezed
           ? _value.strIba
           : strIba // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strAlcoholic: strAlcoholic == freezed
           ? _value.strAlcoholic
           : strAlcoholic // ignore: cast_nullable_to_non_nullable
@@ -248,7 +248,7 @@ class _$DrinkCopyWithImpl<$Res> implements $DrinkCopyWith<$Res> {
       strInstructionsEs: strInstructionsEs == freezed
           ? _value.strInstructionsEs
           : strInstructionsEs // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strInstructionsDe: strInstructionsDe == freezed
           ? _value.strInstructionsDe
           : strInstructionsDe // ignore: cast_nullable_to_non_nullable
@@ -256,7 +256,7 @@ class _$DrinkCopyWithImpl<$Res> implements $DrinkCopyWith<$Res> {
       strInstructionsFr: strInstructionsFr == freezed
           ? _value.strInstructionsFr
           : strInstructionsFr // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strInstructionsIt: strInstructionsIt == freezed
           ? _value.strInstructionsIt
           : strInstructionsIt // ignore: cast_nullable_to_non_nullable
@@ -264,11 +264,11 @@ class _$DrinkCopyWithImpl<$Res> implements $DrinkCopyWith<$Res> {
       strInstructionsZhHans: strInstructionsZhHans == freezed
           ? _value.strInstructionsZhHans
           : strInstructionsZhHans // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strInstructionsZhHant: strInstructionsZhHant == freezed
           ? _value.strInstructionsZhHant
           : strInstructionsZhHant // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strDrinkThumb: strDrinkThumb == freezed
           ? _value.strDrinkThumb
           : strDrinkThumb // ignore: cast_nullable_to_non_nullable
@@ -292,47 +292,47 @@ class _$DrinkCopyWithImpl<$Res> implements $DrinkCopyWith<$Res> {
       strIngredient5: strIngredient5 == freezed
           ? _value.strIngredient5
           : strIngredient5 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient6: strIngredient6 == freezed
           ? _value.strIngredient6
           : strIngredient6 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient7: strIngredient7 == freezed
           ? _value.strIngredient7
           : strIngredient7 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient8: strIngredient8 == freezed
           ? _value.strIngredient8
           : strIngredient8 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient9: strIngredient9 == freezed
           ? _value.strIngredient9
           : strIngredient9 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient10: strIngredient10 == freezed
           ? _value.strIngredient10
           : strIngredient10 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient11: strIngredient11 == freezed
           ? _value.strIngredient11
           : strIngredient11 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient12: strIngredient12 == freezed
           ? _value.strIngredient12
           : strIngredient12 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient13: strIngredient13 == freezed
           ? _value.strIngredient13
           : strIngredient13 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient14: strIngredient14 == freezed
           ? _value.strIngredient14
           : strIngredient14 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient15: strIngredient15 == freezed
           ? _value.strIngredient15
           : strIngredient15 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure1: strMeasure1 == freezed
           ? _value.strMeasure1
           : strMeasure1 // ignore: cast_nullable_to_non_nullable
@@ -348,59 +348,59 @@ class _$DrinkCopyWithImpl<$Res> implements $DrinkCopyWith<$Res> {
       strMeasure4: strMeasure4 == freezed
           ? _value.strMeasure4
           : strMeasure4 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure5: strMeasure5 == freezed
           ? _value.strMeasure5
           : strMeasure5 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure6: strMeasure6 == freezed
           ? _value.strMeasure6
           : strMeasure6 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure7: strMeasure7 == freezed
           ? _value.strMeasure7
           : strMeasure7 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure8: strMeasure8 == freezed
           ? _value.strMeasure8
           : strMeasure8 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure9: strMeasure9 == freezed
           ? _value.strMeasure9
           : strMeasure9 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure10: strMeasure10 == freezed
           ? _value.strMeasure10
           : strMeasure10 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure11: strMeasure11 == freezed
           ? _value.strMeasure11
           : strMeasure11 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure12: strMeasure12 == freezed
           ? _value.strMeasure12
           : strMeasure12 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure13: strMeasure13 == freezed
           ? _value.strMeasure13
           : strMeasure13 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure14: strMeasure14 == freezed
           ? _value.strMeasure14
           : strMeasure14 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure15: strMeasure15 == freezed
           ? _value.strMeasure15
           : strMeasure15 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strImageSource: strImageSource == freezed
           ? _value.strImageSource
           : strImageSource // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strImageAttribution: strImageAttribution == freezed
           ? _value.strImageAttribution
           : strImageAttribution // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strCreativeCommonsConfirmed: strCreativeCommonsConfirmed == freezed
           ? _value.strCreativeCommonsConfirmed
           : strCreativeCommonsConfirmed // ignore: cast_nullable_to_non_nullable
@@ -421,53 +421,53 @@ abstract class _$$_DrinkCopyWith<$Res> implements $DrinkCopyWith<$Res> {
   $Res call(
       {String? idDrink,
       String? strDrink,
-      dynamic strDrinkAlternate,
-      dynamic strTags,
-      dynamic strVideo,
+      String? strDrinkAlternate,
+      String? strTags,
+      String? strVideo,
       String? strCategory,
-      @JsonKey(name: 'strIBA') dynamic strIba,
+      @JsonKey(name: 'strIBA') String? strIba,
       String? strAlcoholic,
       String? strGlass,
       String? strInstructions,
-      @JsonKey(name: 'strInstructionsES') dynamic strInstructionsEs,
+      @JsonKey(name: 'strInstructionsES') String? strInstructionsEs,
       @JsonKey(name: 'strInstructionsDE') String? strInstructionsDe,
-      @JsonKey(name: 'strInstructionsFR') dynamic strInstructionsFr,
+      @JsonKey(name: 'strInstructionsFR') String? strInstructionsFr,
       @JsonKey(name: 'strInstructionsIT') String? strInstructionsIt,
-      @JsonKey(name: 'strInstructionsZH-HANS') dynamic strInstructionsZhHans,
-      @JsonKey(name: 'strInstructionsZH-HANT') dynamic strInstructionsZhHant,
+      @JsonKey(name: 'strInstructionsZH-HANS') String? strInstructionsZhHans,
+      @JsonKey(name: 'strInstructionsZH-HANT') String? strInstructionsZhHant,
       String? strDrinkThumb,
       String? strIngredient1,
       String? strIngredient2,
       String? strIngredient3,
       String? strIngredient4,
-      dynamic strIngredient5,
-      dynamic strIngredient6,
-      dynamic strIngredient7,
-      dynamic strIngredient8,
-      dynamic strIngredient9,
-      dynamic strIngredient10,
-      dynamic strIngredient11,
-      dynamic strIngredient12,
-      dynamic strIngredient13,
-      dynamic strIngredient14,
-      dynamic strIngredient15,
+      String? strIngredient5,
+      String? strIngredient6,
+      String? strIngredient7,
+      String? strIngredient8,
+      String? strIngredient9,
+      String? strIngredient10,
+      String? strIngredient11,
+      String? strIngredient12,
+      String? strIngredient13,
+      String? strIngredient14,
+      String? strIngredient15,
       String? strMeasure1,
       String? strMeasure2,
       String? strMeasure3,
-      dynamic strMeasure4,
-      dynamic strMeasure5,
-      dynamic strMeasure6,
-      dynamic strMeasure7,
-      dynamic strMeasure8,
-      dynamic strMeasure9,
-      dynamic strMeasure10,
-      dynamic strMeasure11,
-      dynamic strMeasure12,
-      dynamic strMeasure13,
-      dynamic strMeasure14,
-      dynamic strMeasure15,
-      dynamic strImageSource,
-      dynamic strImageAttribution,
+      String? strMeasure4,
+      String? strMeasure5,
+      String? strMeasure6,
+      String? strMeasure7,
+      String? strMeasure8,
+      String? strMeasure9,
+      String? strMeasure10,
+      String? strMeasure11,
+      String? strMeasure12,
+      String? strMeasure13,
+      String? strMeasure14,
+      String? strMeasure15,
+      String? strImageSource,
+      String? strImageAttribution,
       String? strCreativeCommonsConfirmed,
       String? dateModified});
 }
@@ -547,15 +547,15 @@ class __$$_DrinkCopyWithImpl<$Res> extends _$DrinkCopyWithImpl<$Res>
       strDrinkAlternate: strDrinkAlternate == freezed
           ? _value.strDrinkAlternate
           : strDrinkAlternate // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strTags: strTags == freezed
           ? _value.strTags
           : strTags // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strVideo: strVideo == freezed
           ? _value.strVideo
           : strVideo // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strCategory: strCategory == freezed
           ? _value.strCategory
           : strCategory // ignore: cast_nullable_to_non_nullable
@@ -563,7 +563,7 @@ class __$$_DrinkCopyWithImpl<$Res> extends _$DrinkCopyWithImpl<$Res>
       strIba: strIba == freezed
           ? _value.strIba
           : strIba // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strAlcoholic: strAlcoholic == freezed
           ? _value.strAlcoholic
           : strAlcoholic // ignore: cast_nullable_to_non_nullable
@@ -579,7 +579,7 @@ class __$$_DrinkCopyWithImpl<$Res> extends _$DrinkCopyWithImpl<$Res>
       strInstructionsEs: strInstructionsEs == freezed
           ? _value.strInstructionsEs
           : strInstructionsEs // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strInstructionsDe: strInstructionsDe == freezed
           ? _value.strInstructionsDe
           : strInstructionsDe // ignore: cast_nullable_to_non_nullable
@@ -587,7 +587,7 @@ class __$$_DrinkCopyWithImpl<$Res> extends _$DrinkCopyWithImpl<$Res>
       strInstructionsFr: strInstructionsFr == freezed
           ? _value.strInstructionsFr
           : strInstructionsFr // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strInstructionsIt: strInstructionsIt == freezed
           ? _value.strInstructionsIt
           : strInstructionsIt // ignore: cast_nullable_to_non_nullable
@@ -595,11 +595,11 @@ class __$$_DrinkCopyWithImpl<$Res> extends _$DrinkCopyWithImpl<$Res>
       strInstructionsZhHans: strInstructionsZhHans == freezed
           ? _value.strInstructionsZhHans
           : strInstructionsZhHans // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strInstructionsZhHant: strInstructionsZhHant == freezed
           ? _value.strInstructionsZhHant
           : strInstructionsZhHant // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strDrinkThumb: strDrinkThumb == freezed
           ? _value.strDrinkThumb
           : strDrinkThumb // ignore: cast_nullable_to_non_nullable
@@ -623,47 +623,47 @@ class __$$_DrinkCopyWithImpl<$Res> extends _$DrinkCopyWithImpl<$Res>
       strIngredient5: strIngredient5 == freezed
           ? _value.strIngredient5
           : strIngredient5 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient6: strIngredient6 == freezed
           ? _value.strIngredient6
           : strIngredient6 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient7: strIngredient7 == freezed
           ? _value.strIngredient7
           : strIngredient7 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient8: strIngredient8 == freezed
           ? _value.strIngredient8
           : strIngredient8 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient9: strIngredient9 == freezed
           ? _value.strIngredient9
           : strIngredient9 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient10: strIngredient10 == freezed
           ? _value.strIngredient10
           : strIngredient10 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient11: strIngredient11 == freezed
           ? _value.strIngredient11
           : strIngredient11 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient12: strIngredient12 == freezed
           ? _value.strIngredient12
           : strIngredient12 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient13: strIngredient13 == freezed
           ? _value.strIngredient13
           : strIngredient13 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient14: strIngredient14 == freezed
           ? _value.strIngredient14
           : strIngredient14 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strIngredient15: strIngredient15 == freezed
           ? _value.strIngredient15
           : strIngredient15 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure1: strMeasure1 == freezed
           ? _value.strMeasure1
           : strMeasure1 // ignore: cast_nullable_to_non_nullable
@@ -679,59 +679,59 @@ class __$$_DrinkCopyWithImpl<$Res> extends _$DrinkCopyWithImpl<$Res>
       strMeasure4: strMeasure4 == freezed
           ? _value.strMeasure4
           : strMeasure4 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure5: strMeasure5 == freezed
           ? _value.strMeasure5
           : strMeasure5 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure6: strMeasure6 == freezed
           ? _value.strMeasure6
           : strMeasure6 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure7: strMeasure7 == freezed
           ? _value.strMeasure7
           : strMeasure7 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure8: strMeasure8 == freezed
           ? _value.strMeasure8
           : strMeasure8 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure9: strMeasure9 == freezed
           ? _value.strMeasure9
           : strMeasure9 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure10: strMeasure10 == freezed
           ? _value.strMeasure10
           : strMeasure10 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure11: strMeasure11 == freezed
           ? _value.strMeasure11
           : strMeasure11 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure12: strMeasure12 == freezed
           ? _value.strMeasure12
           : strMeasure12 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure13: strMeasure13 == freezed
           ? _value.strMeasure13
           : strMeasure13 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure14: strMeasure14 == freezed
           ? _value.strMeasure14
           : strMeasure14 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strMeasure15: strMeasure15 == freezed
           ? _value.strMeasure15
           : strMeasure15 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strImageSource: strImageSource == freezed
           ? _value.strImageSource
           : strImageSource // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strImageAttribution: strImageAttribution == freezed
           ? _value.strImageAttribution
           : strImageAttribution // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       strCreativeCommonsConfirmed: strCreativeCommonsConfirmed == freezed
           ? _value.strCreativeCommonsConfirmed
           : strCreativeCommonsConfirmed // ignore: cast_nullable_to_non_nullable
@@ -808,16 +808,16 @@ class _$_Drink implements _Drink {
   @override
   final String? strDrink;
   @override
-  final dynamic strDrinkAlternate;
+  final String? strDrinkAlternate;
   @override
-  final dynamic strTags;
+  final String? strTags;
   @override
-  final dynamic strVideo;
+  final String? strVideo;
   @override
   final String? strCategory;
   @override
   @JsonKey(name: 'strIBA')
-  final dynamic strIba;
+  final String? strIba;
   @override
   final String? strAlcoholic;
   @override
@@ -826,22 +826,22 @@ class _$_Drink implements _Drink {
   final String? strInstructions;
   @override
   @JsonKey(name: 'strInstructionsES')
-  final dynamic strInstructionsEs;
+  final String? strInstructionsEs;
   @override
   @JsonKey(name: 'strInstructionsDE')
   final String? strInstructionsDe;
   @override
   @JsonKey(name: 'strInstructionsFR')
-  final dynamic strInstructionsFr;
+  final String? strInstructionsFr;
   @override
   @JsonKey(name: 'strInstructionsIT')
   final String? strInstructionsIt;
   @override
   @JsonKey(name: 'strInstructionsZH-HANS')
-  final dynamic strInstructionsZhHans;
+  final String? strInstructionsZhHans;
   @override
   @JsonKey(name: 'strInstructionsZH-HANT')
-  final dynamic strInstructionsZhHant;
+  final String? strInstructionsZhHant;
   @override
   final String? strDrinkThumb;
   @override
@@ -853,27 +853,27 @@ class _$_Drink implements _Drink {
   @override
   final String? strIngredient4;
   @override
-  final dynamic strIngredient5;
+  final String? strIngredient5;
   @override
-  final dynamic strIngredient6;
+  final String? strIngredient6;
   @override
-  final dynamic strIngredient7;
+  final String? strIngredient7;
   @override
-  final dynamic strIngredient8;
+  final String? strIngredient8;
   @override
-  final dynamic strIngredient9;
+  final String? strIngredient9;
   @override
-  final dynamic strIngredient10;
+  final String? strIngredient10;
   @override
-  final dynamic strIngredient11;
+  final String? strIngredient11;
   @override
-  final dynamic strIngredient12;
+  final String? strIngredient12;
   @override
-  final dynamic strIngredient13;
+  final String? strIngredient13;
   @override
-  final dynamic strIngredient14;
+  final String? strIngredient14;
   @override
-  final dynamic strIngredient15;
+  final String? strIngredient15;
   @override
   final String? strMeasure1;
   @override
@@ -881,33 +881,33 @@ class _$_Drink implements _Drink {
   @override
   final String? strMeasure3;
   @override
-  final dynamic strMeasure4;
+  final String? strMeasure4;
   @override
-  final dynamic strMeasure5;
+  final String? strMeasure5;
   @override
-  final dynamic strMeasure6;
+  final String? strMeasure6;
   @override
-  final dynamic strMeasure7;
+  final String? strMeasure7;
   @override
-  final dynamic strMeasure8;
+  final String? strMeasure8;
   @override
-  final dynamic strMeasure9;
+  final String? strMeasure9;
   @override
-  final dynamic strMeasure10;
+  final String? strMeasure10;
   @override
-  final dynamic strMeasure11;
+  final String? strMeasure11;
   @override
-  final dynamic strMeasure12;
+  final String? strMeasure12;
   @override
-  final dynamic strMeasure13;
+  final String? strMeasure13;
   @override
-  final dynamic strMeasure14;
+  final String? strMeasure14;
   @override
-  final dynamic strMeasure15;
+  final String? strMeasure15;
   @override
-  final dynamic strImageSource;
+  final String? strImageSource;
   @override
-  final dynamic strImageAttribution;
+  final String? strImageAttribution;
   @override
   final String? strCreativeCommonsConfirmed;
   @override
@@ -1094,60 +1094,60 @@ abstract class _Drink implements Drink {
   factory _Drink(
       {final String? idDrink,
       final String? strDrink,
-      final dynamic strDrinkAlternate,
-      final dynamic strTags,
-      final dynamic strVideo,
+      final String? strDrinkAlternate,
+      final String? strTags,
+      final String? strVideo,
       final String? strCategory,
       @JsonKey(name: 'strIBA')
-          final dynamic strIba,
+          final String? strIba,
       final String? strAlcoholic,
       final String? strGlass,
       final String? strInstructions,
       @JsonKey(name: 'strInstructionsES')
-          final dynamic strInstructionsEs,
+          final String? strInstructionsEs,
       @JsonKey(name: 'strInstructionsDE')
           final String? strInstructionsDe,
       @JsonKey(name: 'strInstructionsFR')
-          final dynamic strInstructionsFr,
+          final String? strInstructionsFr,
       @JsonKey(name: 'strInstructionsIT')
           final String? strInstructionsIt,
       @JsonKey(name: 'strInstructionsZH-HANS')
-          final dynamic strInstructionsZhHans,
+          final String? strInstructionsZhHans,
       @JsonKey(name: 'strInstructionsZH-HANT')
-          final dynamic strInstructionsZhHant,
+          final String? strInstructionsZhHant,
       final String? strDrinkThumb,
       final String? strIngredient1,
       final String? strIngredient2,
       final String? strIngredient3,
       final String? strIngredient4,
-      final dynamic strIngredient5,
-      final dynamic strIngredient6,
-      final dynamic strIngredient7,
-      final dynamic strIngredient8,
-      final dynamic strIngredient9,
-      final dynamic strIngredient10,
-      final dynamic strIngredient11,
-      final dynamic strIngredient12,
-      final dynamic strIngredient13,
-      final dynamic strIngredient14,
-      final dynamic strIngredient15,
+      final String? strIngredient5,
+      final String? strIngredient6,
+      final String? strIngredient7,
+      final String? strIngredient8,
+      final String? strIngredient9,
+      final String? strIngredient10,
+      final String? strIngredient11,
+      final String? strIngredient12,
+      final String? strIngredient13,
+      final String? strIngredient14,
+      final String? strIngredient15,
       final String? strMeasure1,
       final String? strMeasure2,
       final String? strMeasure3,
-      final dynamic strMeasure4,
-      final dynamic strMeasure5,
-      final dynamic strMeasure6,
-      final dynamic strMeasure7,
-      final dynamic strMeasure8,
-      final dynamic strMeasure9,
-      final dynamic strMeasure10,
-      final dynamic strMeasure11,
-      final dynamic strMeasure12,
-      final dynamic strMeasure13,
-      final dynamic strMeasure14,
-      final dynamic strMeasure15,
-      final dynamic strImageSource,
-      final dynamic strImageAttribution,
+      final String? strMeasure4,
+      final String? strMeasure5,
+      final String? strMeasure6,
+      final String? strMeasure7,
+      final String? strMeasure8,
+      final String? strMeasure9,
+      final String? strMeasure10,
+      final String? strMeasure11,
+      final String? strMeasure12,
+      final String? strMeasure13,
+      final String? strMeasure14,
+      final String? strMeasure15,
+      final String? strImageSource,
+      final String? strImageAttribution,
       final String? strCreativeCommonsConfirmed,
       final String? dateModified}) = _$_Drink;
 
@@ -1158,16 +1158,16 @@ abstract class _Drink implements Drink {
   @override
   String? get strDrink;
   @override
-  dynamic get strDrinkAlternate;
+  String? get strDrinkAlternate;
   @override
-  dynamic get strTags;
+  String? get strTags;
   @override
-  dynamic get strVideo;
+  String? get strVideo;
   @override
   String? get strCategory;
   @override
   @JsonKey(name: 'strIBA')
-  dynamic get strIba;
+  String? get strIba;
   @override
   String? get strAlcoholic;
   @override
@@ -1176,22 +1176,22 @@ abstract class _Drink implements Drink {
   String? get strInstructions;
   @override
   @JsonKey(name: 'strInstructionsES')
-  dynamic get strInstructionsEs;
+  String? get strInstructionsEs;
   @override
   @JsonKey(name: 'strInstructionsDE')
   String? get strInstructionsDe;
   @override
   @JsonKey(name: 'strInstructionsFR')
-  dynamic get strInstructionsFr;
+  String? get strInstructionsFr;
   @override
   @JsonKey(name: 'strInstructionsIT')
   String? get strInstructionsIt;
   @override
   @JsonKey(name: 'strInstructionsZH-HANS')
-  dynamic get strInstructionsZhHans;
+  String? get strInstructionsZhHans;
   @override
   @JsonKey(name: 'strInstructionsZH-HANT')
-  dynamic get strInstructionsZhHant;
+  String? get strInstructionsZhHant;
   @override
   String? get strDrinkThumb;
   @override
@@ -1203,27 +1203,27 @@ abstract class _Drink implements Drink {
   @override
   String? get strIngredient4;
   @override
-  dynamic get strIngredient5;
+  String? get strIngredient5;
   @override
-  dynamic get strIngredient6;
+  String? get strIngredient6;
   @override
-  dynamic get strIngredient7;
+  String? get strIngredient7;
   @override
-  dynamic get strIngredient8;
+  String? get strIngredient8;
   @override
-  dynamic get strIngredient9;
+  String? get strIngredient9;
   @override
-  dynamic get strIngredient10;
+  String? get strIngredient10;
   @override
-  dynamic get strIngredient11;
+  String? get strIngredient11;
   @override
-  dynamic get strIngredient12;
+  String? get strIngredient12;
   @override
-  dynamic get strIngredient13;
+  String? get strIngredient13;
   @override
-  dynamic get strIngredient14;
+  String? get strIngredient14;
   @override
-  dynamic get strIngredient15;
+  String? get strIngredient15;
   @override
   String? get strMeasure1;
   @override
@@ -1231,33 +1231,33 @@ abstract class _Drink implements Drink {
   @override
   String? get strMeasure3;
   @override
-  dynamic get strMeasure4;
+  String? get strMeasure4;
   @override
-  dynamic get strMeasure5;
+  String? get strMeasure5;
   @override
-  dynamic get strMeasure6;
+  String? get strMeasure6;
   @override
-  dynamic get strMeasure7;
+  String? get strMeasure7;
   @override
-  dynamic get strMeasure8;
+  String? get strMeasure8;
   @override
-  dynamic get strMeasure9;
+  String? get strMeasure9;
   @override
-  dynamic get strMeasure10;
+  String? get strMeasure10;
   @override
-  dynamic get strMeasure11;
+  String? get strMeasure11;
   @override
-  dynamic get strMeasure12;
+  String? get strMeasure12;
   @override
-  dynamic get strMeasure13;
+  String? get strMeasure13;
   @override
-  dynamic get strMeasure14;
+  String? get strMeasure14;
   @override
-  dynamic get strMeasure15;
+  String? get strMeasure15;
   @override
-  dynamic get strImageSource;
+  String? get strImageSource;
   @override
-  dynamic get strImageAttribution;
+  String? get strImageAttribution;
   @override
   String? get strCreativeCommonsConfirmed;
   @override

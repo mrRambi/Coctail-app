@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/cubit/drink_cubit.dart';
 
 import '../repository/models/drinks_data/drinks_data.dart';
+import 'widgets/coctail_card.dart';
 
 class CoctailScreen extends StatelessWidget {
   const CoctailScreen({Key? key}) : super(key: key);
@@ -11,15 +12,24 @@ class CoctailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text('space for awesome icon'),
+          ],
+        ),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            width: 400,
-            height: 400,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height - 200,
             child: BlocBuilder<DrinkCubit, DrinkState>(
               builder: (context, state) => state.when(
-                drinkLoading: () => const CircularProgressIndicator(),
+                drinkLoading: () =>
+                    const Center(child: CircularProgressIndicator()),
                 drinkLoadFailure: (e) => Text(e),
                 drinkLoadSuccess: (data) => DisplayDrinkWidget(
                   drinksData: data,
@@ -54,21 +64,12 @@ class DisplayDrinkWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      itemCount: _drinksData.drinks?.length,
       itemBuilder: (context, index) {
-        return Card(
-          child: Column(
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    _drinksData.toString(),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
+        return CoctailCard(
+            strDrink: _drinksData.drinks?[index].strDrink ?? 'Drinks Name',
+            strImageSource: _drinksData.drinks?[index].strImageSource ??
+                'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
       },
     );
   }
