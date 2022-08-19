@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/cubit/drink_cubit.dart';
+import '../../../data/repositories/models/drinks_model/drinks_data.dart';
 
-import '../repository/models/drinks_data/drinks_data.dart';
+import '../cubit/drink_cubit.dart';
 import 'widgets/coctail_card.dart';
 
 class CoctailScreen extends StatelessWidget {

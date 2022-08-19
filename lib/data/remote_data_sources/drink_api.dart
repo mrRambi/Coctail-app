@@ -2,11 +2,15 @@ import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:recipe_app/repository/models/drinks_data/drinks_data.dart';
+import 'package:injectable/injectable.dart';
 
-class DrinkRepo {
-  Future<DrinksData?> fetchDrinkFromSever() async {
+import '../repositories/models/drinks_model/drinks_data.dart';
+
+@injectable
+class DrinkApi {
+  Future<DrinksData?> fetchDrinkFromSever(String parametr) async {
     String url = dotenv.get('API_URL');
+    String uri = '$url$parametr';
     final result = await http.Client()
         .get(Uri.parse(url), headers: {"Content-Type": "application/json"});
     if (result.statusCode == 200) {

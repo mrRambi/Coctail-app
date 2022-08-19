@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:recipe_app/bloc/cubit/drink_cubit.dart';
-import 'package:recipe_app/repository/drink_repo.dart';
-import 'package:recipe_app/screens/coctail_screen.dart';
+import 'package:recipe_app/data/repositories/drink_repository.dart';
+import 'package:recipe_app/feature/display_drinks/view/coctail_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'l10n/l10n.dart';
+import 'di.dart';
+import 'feature/display_drinks/cubit/drink_cubit.dart';
+
+import 'l10n.dart';
 
 Future<void> main() async {
+  configureDependencies();
   await dotenv.load(fileName: ".env");
 
   runApp(const MyApp());
@@ -33,7 +36,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: BlocProvider(
-        create: (context) => DrinkCubit(DrinkRepo()),
+        create: (context) => DrinkCubit(DrinkRepository(drinkService: getIt())),
         child: const CoctailScreen(),
       ),
     );
