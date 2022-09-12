@@ -334,6 +334,8 @@ abstract class _$$_DrinkLoadSuccessCopyWith<$Res> {
           _$_DrinkLoadSuccess value, $Res Function(_$_DrinkLoadSuccess) then) =
       __$$_DrinkLoadSuccessCopyWithImpl<$Res>;
   $Res call({DrinksData data});
+
+  $DrinksDataCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -357,6 +359,13 @@ class __$$_DrinkLoadSuccessCopyWithImpl<$Res>
           : data // ignore: cast_nullable_to_non_nullable
               as DrinksData,
     ));
+  }
+
+  @override
+  $DrinksDataCopyWith<$Res> get data {
+    return $DrinksDataCopyWith<$Res>(_value.data, (value) {
+      return _then(_value.copyWith(data: value));
+    });
   }
 }
 

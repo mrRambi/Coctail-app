@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "526473554718",
+    "project_id": "coctail-app-15865",
+    "storage_bucket": "coctail-app-15865.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526473554718:android:44e47f93510e031710b70f",
+        "android_client_info": {
+          "package_name": "com.example.recipe_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "526473554718-icps0iq5p8pbg5rov6b1a5ovd885k04d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF1_yA5VJt-zUopKfwkxqHPQddwDECI2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "526473554718-icps0iq5p8pbg5rov6b1a5ovd885k04d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

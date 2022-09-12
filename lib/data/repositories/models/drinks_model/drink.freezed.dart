@@ -746,7 +746,7 @@ class __$$_DrinkCopyWithImpl<$Res> extends _$DrinkCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Drink implements _Drink {
+class _$_Drink extends _Drink {
   _$_Drink(
       {this.idDrink,
       this.strDrink,
@@ -798,7 +798,8 @@ class _$_Drink implements _Drink {
       this.strImageSource,
       this.strImageAttribution,
       this.strCreativeCommonsConfirmed,
-      this.dateModified});
+      this.dateModified})
+      : super._();
 
   factory _$_Drink.fromJson(Map<String, dynamic> json) =>
       _$$_DrinkFromJson(json);
@@ -912,11 +913,6 @@ class _$_Drink implements _Drink {
   final String? strCreativeCommonsConfirmed;
   @override
   final String? dateModified;
-
-  @override
-  String toString() {
-    return 'Drink(idDrink: $idDrink, strDrink: $strDrink, strDrinkAlternate: $strDrinkAlternate, strTags: $strTags, strVideo: $strVideo, strCategory: $strCategory, strIba: $strIba, strAlcoholic: $strAlcoholic, strGlass: $strGlass, strInstructions: $strInstructions, strInstructionsEs: $strInstructionsEs, strInstructionsDe: $strInstructionsDe, strInstructionsFr: $strInstructionsFr, strInstructionsIt: $strInstructionsIt, strInstructionsZhHans: $strInstructionsZhHans, strInstructionsZhHant: $strInstructionsZhHant, strDrinkThumb: $strDrinkThumb, strIngredient1: $strIngredient1, strIngredient2: $strIngredient2, strIngredient3: $strIngredient3, strIngredient4: $strIngredient4, strIngredient5: $strIngredient5, strIngredient6: $strIngredient6, strIngredient7: $strIngredient7, strIngredient8: $strIngredient8, strIngredient9: $strIngredient9, strIngredient10: $strIngredient10, strIngredient11: $strIngredient11, strIngredient12: $strIngredient12, strIngredient13: $strIngredient13, strIngredient14: $strIngredient14, strIngredient15: $strIngredient15, strMeasure1: $strMeasure1, strMeasure2: $strMeasure2, strMeasure3: $strMeasure3, strMeasure4: $strMeasure4, strMeasure5: $strMeasure5, strMeasure6: $strMeasure6, strMeasure7: $strMeasure7, strMeasure8: $strMeasure8, strMeasure9: $strMeasure9, strMeasure10: $strMeasure10, strMeasure11: $strMeasure11, strMeasure12: $strMeasure12, strMeasure13: $strMeasure13, strMeasure14: $strMeasure14, strMeasure15: $strMeasure15, strImageSource: $strImageSource, strImageAttribution: $strImageAttribution, strCreativeCommonsConfirmed: $strCreativeCommonsConfirmed, dateModified: $dateModified)';
-  }
 
   @override
   bool operator ==(dynamic other) {
@@ -1090,7 +1086,7 @@ class _$_Drink implements _Drink {
   }
 }
 
-abstract class _Drink implements Drink {
+abstract class _Drink extends Drink {
   factory _Drink(
       {final String? idDrink,
       final String? strDrink,
@@ -1150,6 +1146,7 @@ abstract class _Drink implements Drink {
       final String? strImageAttribution,
       final String? strCreativeCommonsConfirmed,
       final String? dateModified}) = _$_Drink;
+  _Drink._() : super._();
 
   factory _Drink.fromJson(Map<String, dynamic> json) = _$_Drink.fromJson;
 

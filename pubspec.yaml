@@ -48,6 +48,17 @@ dependencies:
   injectable: ^1.5.3
   injectable_generator: ^1.5.4
   get_it: ^7.2.0
+  auth: ^8.1.0
+  firebase_auth: ^3.7.0
+  firebase_core: ^1.21.1
+  meta: ^1.7.0
+  google_sign_in: ^5.4.1
+  formz: ^0.4.1
+  form_input: ^0.1.1
+  font_awesome_flutter: ^10.1.0
+  cloud_firestore: ^3.4.6
+  
+
 
 dev_dependencies:
   flutter_test:
