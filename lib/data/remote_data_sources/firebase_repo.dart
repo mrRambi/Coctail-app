@@ -9,6 +9,7 @@ import 'package:meta/meta.dart';
 
 import '../repositories/models/app_user.dart';
 
+@injectable
 class SignUpWithEmailAndPasswordFailure implements Exception {
   const SignUpWithEmailAndPasswordFailure([
     this.message = 'An unknown exception occurred.',
@@ -44,6 +45,7 @@ class SignUpWithEmailAndPasswordFailure implements Exception {
   final String message;
 }
 
+@injectable
 class LogInWithEmailAndPasswordFailure implements Exception {
   const LogInWithEmailAndPasswordFailure([
     this.message = 'An unknown exception occurred.',
@@ -75,6 +77,7 @@ class LogInWithEmailAndPasswordFailure implements Exception {
   final String message;
 }
 
+@injectable
 class LogInWithGoogleFailure implements Exception {
   const LogInWithGoogleFailure([
     this.message = 'An unknown exception occurred.',
@@ -122,8 +125,8 @@ class LogInWithGoogleFailure implements Exception {
   final String message;
 }
 
+@injectable
 class LogOutFailure implements Exception {}
-
 
 @injectable
 class AuthenticationRepository {
@@ -139,7 +142,6 @@ class AuthenticationRepository {
   @visibleForTesting
   bool isWeb = kIsWeb;
 
-
   Stream<AppUser?> get user {
     return _firebaseAuth.authStateChanges().map((firebaseUser) {
       final user = firebaseUser?.toUser;
@@ -151,8 +153,7 @@ class AuthenticationRepository {
   Future<UserCredential> signUp(
       {required String email, required String password}) async {
     try {
-      return 
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      return await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -222,6 +223,3 @@ extension on firebase_auth.User {
     return AppUser(id: uid, email: email ?? 'no email');
   }
 }
-
-
-  

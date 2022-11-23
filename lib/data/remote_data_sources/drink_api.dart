@@ -8,6 +8,7 @@ import '../repositories/models/drinks_model/drinks_data.dart';
 
 @injectable
 class DrinkApi {
+  @factoryMethod
   Future<DrinksData?> fetchDrinkFromSever(String parametr) async {
     String url = dotenv.get('API_URL');
     String uri = '$url$parametr';

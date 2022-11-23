@@ -11,26 +11,32 @@ class FavoriteDrinkOfUserCubit extends Cubit<FavoriteDrinkOfUserState> {
 
   final CurrentUserRepo _currentUserRepo;
 
-
-  
-
-  Future<void> addFavorite(String name) async {
-   
+  Future<void> addFavorite(String id) async {
     emit(const FavoriteDrinkOfUserState.favoriteLoading());
     try {
-      final data = await _currentUserRepo.addFavoriteDrinkToUser(name);
+      final data = await _currentUserRepo.addFavoriteDrinkToUser(id);
+
       emit(FavoriteDrinkOfUserState.favoriteLoadSuccess(data));
     } catch (e) {
       emit(FavoriteDrinkOfUserState.favoriteLoadError(e.toString()));
     }
   }
 
-  Future<void> removeFavorite(String name) async {
-    
+  Future<void> removeFavorite(String id) async {
     emit(const FavoriteDrinkOfUserState.favoriteLoading());
     try {
-      final data = await _currentUserRepo.removeFavoriteDrinkToUser(name);
+      final data = await _currentUserRepo.removeFavoriteDrinkToUser(id);
       emit(FavoriteDrinkOfUserState.favoriteLoadSuccess(data));
+    } catch (e) {
+      emit(FavoriteDrinkOfUserState.favoriteLoadError(e.toString()));
+    }
+  }
+
+  Future<void> readFavorite() async {
+    emit(const FavoriteDrinkOfUserState.favoriteLoading());
+    try {
+      final data = await _currentUserRepo.readUser();
+      emit(FavoriteDrinkOfUserState.favoriteLoadSuccess([data]));
     } catch (e) {
       emit(FavoriteDrinkOfUserState.favoriteLoadError(e.toString()));
     }

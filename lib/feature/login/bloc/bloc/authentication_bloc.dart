@@ -31,9 +31,7 @@ class AuthenticationBloc
       emit(event.user == null
           ? const AuthenticationState.unauthenticated()
           : AuthenticationState.authenticated(event.user!));
-      
     }, logoutRequested: (event) async {
-      
       unawaited(_authenticationRepository.logOut());
     });
   }

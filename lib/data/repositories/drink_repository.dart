@@ -10,4 +10,6 @@ class DrinkRepository {
   });
 
   fetchTopTenDrinks() => drinkService.fetchDrinkFromSever();
+  fetchSpecificDrink(String specificDrinkId) =>
+      drinkService.fetchDrinkByIdFromSever(specificDrinkId);
 }

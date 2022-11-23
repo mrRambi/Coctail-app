@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:recipe_app/data/remote_data_sources/current_user_repo.dart';
 import 'package:recipe_app/feature/favorite/bloc/cubit/favorite_drink_of_user_cubit.dart';
 import 'package:recipe_app/utils/extensions.dart';
 
@@ -68,7 +69,7 @@ class DisplayDrinks extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
               width: MediaQuery.of(context).size.width,
-              height: 180,
+              height: 400,
               decoration: BoxDecoration(
                 color: Colors.black,
                 borderRadius: BorderRadius.circular(15),
@@ -139,15 +140,16 @@ class DisplayDrinks extends StatelessWidget {
                                     favoriteLoadError: (e) => Text(e),
                                     favoriteLoadSuccess: (value) => SizedBox(
                                       child: !value.contains(_drinksData
-                                              .drinks?[index].strDrink)
+                                              .drinks?[index].idDrink)
                                           ? IconButton(
                                               onPressed: () {
+                                                print('add');
                                                 context
                                                     .read<
                                                         FavoriteDrinkOfUserCubit>()
                                                     .addFavorite(_drinksData
                                                             .drinks?[index]
-                                                            .strDrink ??
+                                                            .idDrink ??
                                                         '');
                                               },
                                               icon: const Icon(
@@ -157,12 +159,13 @@ class DisplayDrinks extends StatelessWidget {
                                             )
                                           : IconButton(
                                               onPressed: () {
+                                                print('remove');
                                                 context
                                                     .read<
                                                         FavoriteDrinkOfUserCubit>()
                                                     .removeFavorite(_drinksData
                                                             .drinks?[index]
-                                                            .strDrink ??
+                                                            .idDrink ??
                                                         '');
                                               },
                                               icon: const Icon(Icons.favorite),

@@ -101,7 +101,7 @@ class Drink with _$Drink {
         strMeasure15
       ];
 
-  List<String?> nameOfDrink() => [strDrink];
+  List<String?> idOfDrink() => [idDrink];
 
   factory Drink.fromJson(Map<String, dynamic> json) => _$DrinkFromJson(json);
 }

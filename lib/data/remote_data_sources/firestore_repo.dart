@@ -33,7 +33,6 @@ class DataFireStoreRepo {
           .doc(documentName)
           .get()
           .then((value) {
-  
         return value.data();
       });
 

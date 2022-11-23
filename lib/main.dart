@@ -2,19 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:recipe_app/data/remote_data_sources/current_user_repo.dart';
+import 'package:recipe_app/data/remote_data_sources/drink_api.dart';
 import 'package:recipe_app/data/repositories/drink_repository.dart';
+import 'package:recipe_app/data/service/drink_service.dart';
 import 'package:recipe_app/feature/display_drinks/view/drink_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:recipe_app/feature/favorite/bloc/cubit/favorite_drink_of_user_cubit.dart';
-import 'package:recipe_app/feature/favorite/view/favorite.dart';
+import 'package:recipe_app/feature/favorite/view/favorite_display.dart';
 import 'package:recipe_app/feature/login/bloc/bloc/authentication_bloc.dart';
 import 'package:recipe_app/feature/login/bloc/cubit/login_cubit.dart';
 import 'package:recipe_app/feature/login/view/widgets/login_form.dart';
 import 'package:recipe_app/feature/registration/cubit/sign_up_cubit.dart';
 
 import 'data/remote_data_sources/firebase_repo.dart';
+
 import 'di.dart';
 import 'feature/display_drinks/cubit/drink_cubit.dart';
 
@@ -22,20 +25,63 @@ import 'l10n.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = MyBlocObserver();
 
   await Firebase.initializeApp();
+  configureDependencies();
+  // getIt.registerLazySingleton<DrinkService>(
+  //     () => DrinkService(drinkApi: DrinkApi()));
+  await getIt.allReady();
 
   final authenticationRepository = AuthenticationRepository();
   await authenticationRepository.user.first;
-  final currentUserRepo = CurrentUserRepo();
 
-  configureDependencies();
+  final currentUserRepo = CurrentUserRepo(getIt());
+
   await dotenv.load(fileName: ".env");
 
   runApp(MyApp(
     authenticationRepository: authenticationRepository,
     currentUserRepo: currentUserRepo,
   ));
+}
+
+class MyBlocObserver extends BlocObserver {
+  @override
+  void onCreate(BlocBase bloc) {
+    super.onCreate(bloc);
+    print('onCreate -- ${bloc.runtimeType}');
+  }
+
+  @override
+  void onEvent(Bloc bloc, Object? event) {
+    super.onEvent(bloc, event);
+    print('onEvent -- ${bloc.runtimeType}, $event');
+  }
+
+  @override
+  void onChange(BlocBase bloc, Change change) {
+    super.onChange(bloc, change);
+    print('onChange -- ${bloc.runtimeType}, $change');
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+    print('onTransition -- ${bloc.runtimeType}, $transition');
+  }
+
+  @override
+  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+    print('onError -- ${bloc.runtimeType}, $error');
+    super.onError(bloc, error, stackTrace);
+  }
+
+  @override
+  void onClose(BlocBase bloc) {
+    super.onClose(bloc);
+    print('onClose -- ${bloc.runtimeType}');
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -58,7 +104,7 @@ class MyApp extends StatelessWidget {
           value: _authenticationRepository,
         ),
         RepositoryProvider(
-          create: (context) => CurrentUserRepo(),
+          create: (context) => CurrentUserRepo(getIt()),
         ),
       ],
       child: MultiBlocProvider(
@@ -66,7 +112,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => DrinkCubit(
               DrinkRepository(
-                drinkService: getIt(),
+                drinkService: DrinkService(drinkApi: DrinkApi()),
               ),
             ),
           ),
@@ -81,7 +127,8 @@ class MyApp extends StatelessWidget {
                 SignUpCubit(_authenticationRepository, _currentUserRepo),
           ),
           BlocProvider(
-            create: (context) => FavoriteDrinkOfUserCubit(getIt()),
+            create: (context) =>
+                FavoriteDrinkOfUserCubit(getIt())..readFavorite(),
           ),
         ],
         child: MaterialApp(
@@ -126,6 +173,20 @@ class _AppViewState extends State<AppView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          BlocBuilder<AuthenticationBloc, AuthenticationState>(
+            builder: (context, state) {
+              return state.map(
+                  unknown: (_) => const SizedBox(),
+                  authenticated: (_) => IconButton(
+                      onPressed: () => context
+                          .read<AuthenticationBloc>()
+                          .add(const AuthenticationEvent.logoutRequested()),
+                      icon: const Icon(Icons.logout)),
+                  unauthenticated: (_) => const SizedBox());
+            },
+          ),
+        ],
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
@@ -146,7 +207,9 @@ class _AppViewState extends State<AppView> {
                           create: (context) => AuthenticationBloc(getIt()),
                           child: const LoginForm(),
                         ),
-                    authenticated: (_) => const Favorite(),
+                    authenticated: (_) => FavoriteDisplay(
+                          currentUserRepo: getIt(),
+                        ),
                     unauthenticated: (_) => const LoginForm());
               },
             );
