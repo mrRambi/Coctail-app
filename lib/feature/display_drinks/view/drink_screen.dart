@@ -19,7 +19,7 @@ class DrinkScreen extends StatelessWidget {
                   const Center(child: CircularProgressIndicator()),
               drinkLoadFailure: (e) => Text(e),
               drinkLoadSuccess: (data) => DisplayDrinks(
-                drinksData: data,
+                drinksData: data ,
               ),
             ),
           ),

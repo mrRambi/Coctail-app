@@ -4,6 +4,6 @@ part of 'drink_cubit.dart';
 class DrinkState with _$DrinkState {
   const factory DrinkState.drinkLoading() = _DrinkLoading;
   const factory DrinkState.drinkLoadFailure(String message) = _DrinkLoadFailure;
-  const factory DrinkState.drinkLoadSuccess(DrinksData data) =
+  const factory DrinkState.drinkLoadSuccess(List<Drink> data) =
       _DrinkLoadSuccess;
 }

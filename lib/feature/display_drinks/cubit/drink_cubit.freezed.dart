@@ -20,21 +20,21 @@ mixin _$DrinkState {
   TResult when<TResult extends Object?>({
     required TResult Function() drinkLoading,
     required TResult Function(String message) drinkLoadFailure,
-    required TResult Function(DrinksData data) drinkLoadSuccess,
+    required TResult Function(List<Drink> data) drinkLoadSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? drinkLoading,
     TResult Function(String message)? drinkLoadFailure,
-    TResult Function(DrinksData data)? drinkLoadSuccess,
+    TResult Function(List<Drink> data)? drinkLoadSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? drinkLoading,
     TResult Function(String message)? drinkLoadFailure,
-    TResult Function(DrinksData data)? drinkLoadSuccess,
+    TResult Function(List<Drink> data)? drinkLoadSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,7 +120,7 @@ class _$_DrinkLoading implements _DrinkLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() drinkLoading,
     required TResult Function(String message) drinkLoadFailure,
-    required TResult Function(DrinksData data) drinkLoadSuccess,
+    required TResult Function(List<Drink> data) drinkLoadSuccess,
   }) {
     return drinkLoading();
   }
@@ -130,7 +130,7 @@ class _$_DrinkLoading implements _DrinkLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? drinkLoading,
     TResult Function(String message)? drinkLoadFailure,
-    TResult Function(DrinksData data)? drinkLoadSuccess,
+    TResult Function(List<Drink> data)? drinkLoadSuccess,
   }) {
     return drinkLoading?.call();
   }
@@ -140,7 +140,7 @@ class _$_DrinkLoading implements _DrinkLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? drinkLoading,
     TResult Function(String message)? drinkLoadFailure,
-    TResult Function(DrinksData data)? drinkLoadSuccess,
+    TResult Function(List<Drink> data)? drinkLoadSuccess,
     required TResult orElse(),
   }) {
     if (drinkLoading != null) {
@@ -255,7 +255,7 @@ class _$_DrinkLoadFailure implements _DrinkLoadFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() drinkLoading,
     required TResult Function(String message) drinkLoadFailure,
-    required TResult Function(DrinksData data) drinkLoadSuccess,
+    required TResult Function(List<Drink> data) drinkLoadSuccess,
   }) {
     return drinkLoadFailure(message);
   }
@@ -265,7 +265,7 @@ class _$_DrinkLoadFailure implements _DrinkLoadFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? drinkLoading,
     TResult Function(String message)? drinkLoadFailure,
-    TResult Function(DrinksData data)? drinkLoadSuccess,
+    TResult Function(List<Drink> data)? drinkLoadSuccess,
   }) {
     return drinkLoadFailure?.call(message);
   }
@@ -275,7 +275,7 @@ class _$_DrinkLoadFailure implements _DrinkLoadFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? drinkLoading,
     TResult Function(String message)? drinkLoadFailure,
-    TResult Function(DrinksData data)? drinkLoadSuccess,
+    TResult Function(List<Drink> data)? drinkLoadSuccess,
     required TResult orElse(),
   }) {
     if (drinkLoadFailure != null) {
@@ -333,9 +333,7 @@ abstract class _$$_DrinkLoadSuccessCopyWith<$Res> {
   factory _$$_DrinkLoadSuccessCopyWith(
           _$_DrinkLoadSuccess value, $Res Function(_$_DrinkLoadSuccess) then) =
       __$$_DrinkLoadSuccessCopyWithImpl<$Res>;
-  $Res call({DrinksData data});
-
-  $DrinksDataCopyWith<$Res> get data;
+  $Res call({List<Drink> data});
 }
 
 /// @nodoc
@@ -355,27 +353,24 @@ class __$$_DrinkLoadSuccessCopyWithImpl<$Res>
   }) {
     return _then(_$_DrinkLoadSuccess(
       data == freezed
-          ? _value.data
+          ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as DrinksData,
+              as List<Drink>,
     ));
-  }
-
-  @override
-  $DrinksDataCopyWith<$Res> get data {
-    return $DrinksDataCopyWith<$Res>(_value.data, (value) {
-      return _then(_value.copyWith(data: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$_DrinkLoadSuccess implements _DrinkLoadSuccess {
-  const _$_DrinkLoadSuccess(this.data);
+  const _$_DrinkLoadSuccess(final List<Drink> data) : _data = data;
 
+  final List<Drink> _data;
   @override
-  final DrinksData data;
+  List<Drink> get data {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
 
   @override
   String toString() {
@@ -387,12 +382,12 @@ class _$_DrinkLoadSuccess implements _DrinkLoadSuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DrinkLoadSuccess &&
-            const DeepCollectionEquality().equals(other.data, data));
+            const DeepCollectionEquality().equals(other._data, _data));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
   @JsonKey(ignore: true)
   @override
@@ -404,7 +399,7 @@ class _$_DrinkLoadSuccess implements _DrinkLoadSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() drinkLoading,
     required TResult Function(String message) drinkLoadFailure,
-    required TResult Function(DrinksData data) drinkLoadSuccess,
+    required TResult Function(List<Drink> data) drinkLoadSuccess,
   }) {
     return drinkLoadSuccess(data);
   }
@@ -414,7 +409,7 @@ class _$_DrinkLoadSuccess implements _DrinkLoadSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? drinkLoading,
     TResult Function(String message)? drinkLoadFailure,
-    TResult Function(DrinksData data)? drinkLoadSuccess,
+    TResult Function(List<Drink> data)? drinkLoadSuccess,
   }) {
     return drinkLoadSuccess?.call(data);
   }
@@ -424,7 +419,7 @@ class _$_DrinkLoadSuccess implements _DrinkLoadSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? drinkLoading,
     TResult Function(String message)? drinkLoadFailure,
-    TResult Function(DrinksData data)? drinkLoadSuccess,
+    TResult Function(List<Drink> data)? drinkLoadSuccess,
     required TResult orElse(),
   }) {
     if (drinkLoadSuccess != null) {
@@ -469,9 +464,9 @@ class _$_DrinkLoadSuccess implements _DrinkLoadSuccess {
 }
 
 abstract class _DrinkLoadSuccess implements DrinkState {
-  const factory _DrinkLoadSuccess(final DrinksData data) = _$_DrinkLoadSuccess;
+  const factory _DrinkLoadSuccess(final List<Drink> data) = _$_DrinkLoadSuccess;
 
-  DrinksData get data;
+  List<Drink> get data;
   @JsonKey(ignore: true)
   _$$_DrinkLoadSuccessCopyWith<_$_DrinkLoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;

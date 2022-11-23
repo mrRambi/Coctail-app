@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:recipe_app/data/repositories/models/app_user.dart';
-import 'package:recipe_app/data/repositories/models/drinks_model/drinks_data.dart';
+import 'package:recipe_app/data/repositories/models/drinks_model/drink.dart';
 import 'package:recipe_app/data/service/drink_service.dart';
 
 import 'firestore_repo.dart';
@@ -36,39 +36,67 @@ class CurrentUserRepo {
     );
   }
 
-  Future<List<DrinksData?>> getDrinksApiByFirestoreFavorite() async {
+  Future<List<String>> readUserToStringList() async {
     final favoriteDrinks = await readUser();
 
-    var listOfFavoriteDrinks = favoriteDrinks!['favoriteDrinks'];
+    List listOfFavoriteDrinks = favoriteDrinks!['favoriteDrinks'] as List;
+    final listOfString = listOfFavoriteDrinks.map((e) => e.toString()).toList();
 
-    List<DrinksData?> resultList = await listOfFavoriteDrinks
-        .map((e) => _drinkService.fetchDrinkByIdFromSever(e))
-        .toList();
-    return resultList;
+    return listOfString;
   }
 
-  Future<List<dynamic>> addFavoriteDrinkToUser(String id) async {
+  Future<List<Drink>?> readUserToDrinkList() async {
     final favoriteDrinks = await readUser();
 
-    var specyficFavoriteDrink = favoriteDrinks!['favoriteDrinks'];
-    specyficFavoriteDrink.add(id);
+    List listOfFavoriteDrinks = favoriteDrinks!['favoriteDrinks'] as List;
+    final l = listOfFavoriteDrinks.map((e) => e.toString()).toList();
+    List<Drink>? listOfDrink = [];
+    for (var i in l) {
+      final listOfDrinkServiceItem = Drink(idDrink: i);
+      listOfDrink.add(listOfDrinkServiceItem);
+    }
 
-    await updateFavoriteDrinksList(specyficFavoriteDrink);
-
-    return specyficFavoriteDrink;
+    return listOfDrink;
   }
 
-  Future<List<dynamic>> removeFavoriteDrinkToUser(String id) async {
+  Future<List<Drink>?> getDrinksApiByFirestoreFavorite() async {
     final favoriteDrinks = await readUser();
 
-    List<dynamic> specyficFavoriteDrink = favoriteDrinks!['favoriteDrinks'];
-    specyficFavoriteDrink.remove(id);
+    List listOfFavoriteDrinks = favoriteDrinks!['favoriteDrinks'] as List;
+    final l = listOfFavoriteDrinks.map((e) => e.toString()).toList();
+    List<Drink>? listOfDrink = [];
+    for (var i in l) {
+      final listOfDrinkServiceItem =
+          await _drinkService.fetchDrinkByIdFromSever(i);
+      listOfDrink.add(listOfDrinkServiceItem?.first ?? Drink());
+    }
 
-    await updateFavoriteDrinksList(specyficFavoriteDrink);
-    return specyficFavoriteDrink;
+    return listOfDrink;
   }
 
-  Future<void> updateFavoriteDrinksList(dynamic data) async {
+  Future<List<String>> addFavoriteDrinkToUser(String id) async {
+    final favoriteDrinks = await readUserToStringList();
+
+    // List<String> specyficFavoriteDrink = favoriteDrinks!['favoriteDrinks'];
+    favoriteDrinks.add(id);
+
+    await updateFavoriteDrinksList(favoriteDrinks);
+
+    return favoriteDrinks;
+  }
+
+  Future<List<String>> removeFavoriteDrinkToUser(String id) async {
+    final favoriteDrinks = await readUserToStringList();
+
+    // List<String> specyficFavoriteDrink = favoriteDrinks!['favoriteDrinks'];
+    favoriteDrinks.remove(id);
+
+    await updateFavoriteDrinksList(favoriteDrinks);
+
+    return favoriteDrinks;
+  }
+
+  Future<void> updateFavoriteDrinksList(List<String> data) async {
     await _dataFireStoreRepo.updateCollectionField(
         collectionName: usersCollection,
         docName: userId!,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'package:recipe_app/data/remote_data_sources/current_user_repo.dart';
 import 'package:recipe_app/data/remote_data_sources/drink_api.dart';
 import 'package:recipe_app/data/repositories/drink_repository.dart';
@@ -10,7 +11,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:recipe_app/feature/favorite/bloc/cubit/favorite_drink_of_user_cubit.dart';
-import 'package:recipe_app/feature/favorite/view/favorite_display.dart';
 import 'package:recipe_app/feature/login/bloc/bloc/authentication_bloc.dart';
 import 'package:recipe_app/feature/login/bloc/cubit/login_cubit.dart';
 import 'package:recipe_app/feature/login/view/widgets/login_form.dart';
@@ -21,6 +21,8 @@ import 'data/remote_data_sources/firebase_repo.dart';
 import 'di.dart';
 import 'feature/display_drinks/cubit/drink_cubit.dart';
 
+import 'feature/favorite/view/favorite_screen.dart';
+import 'feature/update_firestore_data.dart/cubit/update_current_user_data_cubit.dart';
 import 'l10n.dart';
 
 Future<void> main() async {
@@ -29,16 +31,14 @@ Future<void> main() async {
 
   await Firebase.initializeApp();
   configureDependencies();
-  // getIt.registerLazySingleton<DrinkService>(
-  //     () => DrinkService(drinkApi: DrinkApi()));
   await getIt.allReady();
 
   final authenticationRepository = AuthenticationRepository();
   await authenticationRepository.user.first;
 
-  final currentUserRepo = CurrentUserRepo(getIt());
-
   await dotenv.load(fileName: ".env");
+  final currentUserRepo = CurrentUserRepo(getIt());
+  await currentUserRepo.getDrinksApiByFirestoreFavorite();
 
   runApp(MyApp(
     authenticationRepository: authenticationRepository,
@@ -130,6 +130,10 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 FavoriteDrinkOfUserCubit(getIt())..readFavorite(),
           ),
+          BlocProvider(
+            create: (context) =>
+                UpdateCurrentUserDataCubit(getIt())..readUserColection(),
+          )
         ],
         child: MaterialApp(
           title: 'Coctail app',
@@ -207,9 +211,7 @@ class _AppViewState extends State<AppView> {
                           create: (context) => AuthenticationBloc(getIt()),
                           child: const LoginForm(),
                         ),
-                    authenticated: (_) => FavoriteDisplay(
-                          currentUserRepo: getIt(),
-                        ),
+                    authenticated: (_) => const FavoriteScreen(),
                     unauthenticated: (_) => const LoginForm());
               },
             );

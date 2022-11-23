@@ -1,53 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:recipe_app/data/remote_data_sources/current_user_repo.dart';
+
 import 'package:recipe_app/feature/favorite/bloc/cubit/favorite_drink_of_user_cubit.dart';
+import 'package:recipe_app/feature/update_firestore_data.dart/cubit/update_current_user_data_cubit.dart';
 import 'package:recipe_app/utils/extensions.dart';
 
-import '../../../../data/repositories/models/drinks_model/drinks_data.dart';
+import '../../../../data/repositories/models/drinks_model/drink.dart';
 import '../../../../utils/const.dart';
 import '../../cubit/drink_cubit.dart';
 
 class DisplayDrinks extends StatelessWidget {
-  const DisplayDrinks({Key? key, required DrinksData drinksData})
+  const DisplayDrinks({Key? key, required List<Drink?> drinksData})
       : _drinksData = drinksData,
         super(key: key);
 
-  final DrinksData _drinksData;
+  final List<Drink?> _drinksData;
 
   @override
   Widget build(BuildContext context) {
-    var ing =
-        _drinksData.drinks?.map((e) => e.ingriedientProperties()).toList();
-    var meas = _drinksData.drinks?.map((e) => e.measureProperties()).toList();
+    var ing = _drinksData.map((e) => e?.ingriedientProperties()).toList();
+    var meas = _drinksData.map((e) => e?.measureProperties()).toList();
 
     return RefreshIndicator(
       onRefresh: () => context.read<DrinkCubit>().fetchDrinks(),
       child: ListView.builder(
-        itemCount: _drinksData.drinks?.length,
+        itemCount: _drinksData.length,
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () async {
               return showDialog(
                 context: context,
                 builder: (ctx) => AlertDialog(
-                  title: Text(_drinksData.drinks?[index].strDrink ?? ''),
+                  title: Text(_drinksData[index]?.strDrink ?? ''),
                   content: SizedBox(
                     height: 200,
                     width: 300,
                     child: ListView.builder(
-                      itemCount: ing?.length,
+                      itemCount: ing.length,
                       itemBuilder: (context, index) {
-                        final measurence = meas?[0][index];
-                        final ingredience = ing?[0][index];
+                        final measurence = meas[0]![index];
+                        final ingredience = ing[0]![index];
                         final isIngNull =
                             measurence == null || ingredience == null;
 
                         return Column(
                           children: [
                             if (index == 0)
-                              Text(_drinksData.drinks?[index].strInstructions ??
-                                  ''),
+                              Text(_drinksData[index]?.strInstructions ?? ''),
                             if (isIngNull) const SizedBox(),
                             if (!isIngNull) Text("$ingredience - $measurence"),
                           ],
@@ -90,8 +89,7 @@ class DisplayDrinks extends StatelessWidget {
                     BlendMode.multiply,
                   ),
                   image: NetworkImage(
-                      _drinksData.drinks?[index].strDrinkThumb ??
-                          linkDrinkPicture),
+                      _drinksData[index]?.strDrinkThumb ?? linkDrinkPicture),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -102,7 +100,7 @@ class DisplayDrinks extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
                       child: Text(
-                        _drinksData.drinks?[index].strDrink ?? 'drink name',
+                        _drinksData[index]?.strDrink ?? 'drink name',
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 30,
@@ -127,29 +125,29 @@ class DisplayDrinks extends StatelessWidget {
                           ),
                           child: Row(
                             children: [
-                              BlocBuilder<FavoriteDrinkOfUserCubit,
-                                  FavoriteDrinkOfUserState>(
+                              BlocBuilder<UpdateCurrentUserDataCubit,
+                                  UpdateCurrentUserDataState>(
                                 builder: (context, state) {
                                   return state.when(
-                                    favoriteLoading: () => IconButton(
+                                    currentUserDataLoading: () => IconButton(
                                         onPressed: () {},
-                                        icon:
-                                            const Icon(Icons.favorite_outline),
+                                        icon: const Icon(Icons.alarm),
                                         color: Colors.white,
                                         iconSize: 18),
-                                    favoriteLoadError: (e) => Text(e),
-                                    favoriteLoadSuccess: (value) => SizedBox(
-                                      child: !value.contains(_drinksData
-                                              .drinks?[index].idDrink)
+                                    currentUserDataError: (e) => Text(e),
+                                    currentUserDataLoadSuccess: (value) =>
+                                        SizedBox(
+                                      child: (!value.contains(_drinksData
+                                              .first?.idDrink
+                                              .toString()))
                                           ? IconButton(
                                               onPressed: () {
-                                                print('add');
                                                 context
                                                     .read<
-                                                        FavoriteDrinkOfUserCubit>()
+                                                        UpdateCurrentUserDataCubit>()
                                                     .addFavorite(_drinksData
-                                                            .drinks?[index]
-                                                            .idDrink ??
+                                                            .first?.idDrink
+                                                            .toString() ??
                                                         '');
                                               },
                                               icon: const Icon(
@@ -159,13 +157,12 @@ class DisplayDrinks extends StatelessWidget {
                                             )
                                           : IconButton(
                                               onPressed: () {
-                                                print('remove');
                                                 context
                                                     .read<
-                                                        FavoriteDrinkOfUserCubit>()
+                                                        UpdateCurrentUserDataCubit>()
                                                     .removeFavorite(_drinksData
-                                                            .drinks?[index]
-                                                            .idDrink ??
+                                                            .first?.idDrink
+                                                            .toString() ??
                                                         '');
                                               },
                                               icon: const Icon(Icons.favorite),
