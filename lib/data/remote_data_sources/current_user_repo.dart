@@ -77,7 +77,7 @@ class CurrentUserRepo {
   Future<List<String>> addFavoriteDrinkToUser(String id) async {
     final favoriteDrinks = await readUserToStringList();
 
-    // List<String> specyficFavoriteDrink = favoriteDrinks!['favoriteDrinks'];
+  
     favoriteDrinks.add(id);
 
     await updateFavoriteDrinksList(favoriteDrinks);
@@ -88,7 +88,7 @@ class CurrentUserRepo {
   Future<List<String>> removeFavoriteDrinkToUser(String id) async {
     final favoriteDrinks = await readUserToStringList();
 
-    // List<String> specyficFavoriteDrink = favoriteDrinks!['favoriteDrinks'];
+  
     favoriteDrinks.remove(id);
 
     await updateFavoriteDrinksList(favoriteDrinks);

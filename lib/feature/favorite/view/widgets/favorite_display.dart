@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recipe_app/data/remote_data_sources/current_user_repo.dart';
+import 'package:recipe_app/utils/extensions.dart';
 
 import '../../../../data/repositories/models/drinks_model/drink.dart';
 import '../../../../utils/const.dart';
+import '../../../update_firestore_data.dart/cubit/update_current_user_data_cubit.dart';
 import '../../bloc/cubit/favorite_drink_of_user_cubit.dart';
 
 class FavoriteDisplay extends StatelessWidget {
@@ -97,14 +99,14 @@ class FavoriteDisplay extends StatelessWidget {
               ),
               child: Stack(
                 children: [
-                  Align(
+                  const Align(
                     alignment: Alignment.center,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      padding: EdgeInsets.symmetric(horizontal: 5.0),
                       child: Text(
                         // drinksData.drinks?[index].strDrink ?? 'drink name',
                         '',
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
                           fontSize: 30,
                         ),
@@ -114,80 +116,83 @@ class FavoriteDisplay extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Align(
-                  //   alignment: Alignment.bottomCenter,
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //     children: [
-                  //       Container(
-                  //         padding: const EdgeInsets.all(5),
-                  //         margin: const EdgeInsets.all(10),
-                  //         decoration: BoxDecoration(
-                  //           color: Colors.black.withOpacity(0.4),
-                  //           borderRadius: BorderRadius.circular(15),
-                  //         ),
-                  //         child: Row(
-                  //           children: [
-                  //             BlocBuilder<FavoriteDrinkOfUserCubit,
-                  //                 FavoriteDrinkOfUserState>(
-                  //               builder: (context, state) {
-                  //                 return state.when(
-                  //                   favoriteLoading: () => IconButton(
-                  //                       onPressed: () {},
-                  //                       icon:
-                  //                           const Icon(Icons.favorite_outline),
-                  //                       color: Colors.white,
-                  //                       iconSize: 18),
-                  //                   favoriteLoadError: (e) => Text(e),
-                  //                   favoriteLoadSuccess: (value) => SizedBox(
-                  //                     child: !value.contains(
-                  //                             drinksData.drinks?[index].idDrink)
-                  //                         ? IconButton(
-                  //                             onPressed: () {
-                  //                               context
-                  //                                   .read<
-                  //                                       FavoriteDrinkOfUserCubit>()
-                  //                                   .addFavorite(drinksData
-                  //                                           .drinks?[index]
-                  //                                           .idDrink ??
-                  //                                       '');
-                  //                             },
-                  //                             icon: const Icon(
-                  //                                 Icons.favorite_outline),
-                  //                             color: Colors.white,
-                  //                             iconSize: 18,
-                  //                           )
-                  //                         : IconButton(
-                  //                             onPressed: () {
-                  //                               context
-                  //                                   .read<
-                  //                                       FavoriteDrinkOfUserCubit>()
-                  //                                   .removeFavorite(drinksData
-                  //                                           .drinks?[index]
-                  //                                           .idDrink ??
-                  //                                       '');
-                  //                             },
-                  //                             icon: const Icon(Icons.favorite),
-                  //                             color: Colors.white,
-                  //                             iconSize: 18,
-                  //                           ),
-                  //                   ),
-                  //                 );
-                  //               },
-                  //             ),
-                  //             const SizedBox(width: 7),
-                  //             Text(
-                  //               context.loc.favoriteButton,
-                  //               style: const TextStyle(
-                  //                 color: Colors.white,
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(5),
+                          margin: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.4),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Row(
+                            children: [
+                              BlocBuilder<FavoriteDrinkOfUserCubit,
+                                  FavoriteDrinkOfUserState>(
+                                builder: (context, state) {
+                                  return state.when(
+                                    favoriteLoading: () => IconButton(
+                                        onPressed: () {},
+                                        icon:
+                                            const Icon(Icons.favorite_outline),
+                                        color: Colors.white,
+                                        iconSize: 18),
+                                    favoriteLoadError: (e) => Text(e),
+                                    favoriteLoadSuccess: (value) => IconButton(
+                                        onPressed: () => showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) =>
+                                                  AlertDialog(
+                                                title: const Text(
+                                                    'AlertDialog Title'),
+                                                content: const Text(
+                                                    'AlertDialog description'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            context, 'Cancel'),
+                                                    child: const Text('Cancel'),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      context
+                                                          .read<
+                                                              UpdateCurrentUserDataCubit>()
+                                                          .removeFavorite(
+                                                              drinksData[index]
+                                                                  .idDrink
+                                                                  .toString());
+                                                      Navigator.pop(
+                                                          context, 'OK');
+                                                    },
+                                                    child: const Text('OK'),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                        icon: const Icon(Icons.delete_outline),
+                                        color: Colors.white,
+                                        iconSize: 18),
+                                  );
+                                },
+                              ),
+                              const SizedBox(width: 7),
+                              Text(
+                                context.loc.favoriteButton,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

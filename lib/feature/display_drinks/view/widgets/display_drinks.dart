@@ -131,7 +131,8 @@ class DisplayDrinks extends StatelessWidget {
                                   return state.when(
                                     currentUserDataLoading: () => IconButton(
                                         onPressed: () {},
-                                        icon: const Icon(Icons.alarm),
+                                        icon:
+                                            const Icon(Icons.favorite_outline),
                                         color: Colors.white,
                                         iconSize: 18),
                                     currentUserDataError: (e) => Text(e),
