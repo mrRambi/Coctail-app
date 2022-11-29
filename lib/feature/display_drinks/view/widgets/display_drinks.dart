@@ -68,7 +68,7 @@ class DisplayDrinks extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
               width: MediaQuery.of(context).size.width,
-              height: 400,
+              height: 200,
               decoration: BoxDecoration(
                 color: Colors.black,
                 borderRadius: BorderRadius.circular(15),

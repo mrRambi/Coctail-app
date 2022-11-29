@@ -17,4 +17,7 @@ class DrinkService {
 
   Future<List<Drink>?> fetchDrinkByIdFromSever(String idOfDrink) =>
       _drinkApi.fetchDrinkFromSever('lookup.php?i=$idOfDrink');
+
+  Future<List<Drink>?> searchDrinkByName(String nameOfDrink) =>
+      _drinkApi.fetchDrinkFromSever('search.php?s=$nameOfDrink');
 }

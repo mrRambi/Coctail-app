@@ -15,6 +15,7 @@ import 'package:recipe_app/feature/login/bloc/bloc/authentication_bloc.dart';
 import 'package:recipe_app/feature/login/bloc/cubit/login_cubit.dart';
 import 'package:recipe_app/feature/login/view/widgets/login_form.dart';
 import 'package:recipe_app/feature/registration/cubit/sign_up_cubit.dart';
+import 'package:recipe_app/feature/search/view/drink_search.dart';
 
 import 'data/remote_data_sources/firebase_repo.dart';
 
@@ -22,6 +23,7 @@ import 'di.dart';
 import 'feature/display_drinks/cubit/drink_cubit.dart';
 
 import 'feature/favorite/view/favorite_screen.dart';
+import 'feature/search/view/cubit/search_drink_cubit.dart';
 import 'feature/update_firestore_data.dart/cubit/update_current_user_data_cubit.dart';
 import 'l10n.dart';
 
@@ -133,6 +135,9 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 UpdateCurrentUserDataCubit(getIt())..readUserColection(),
+          ),
+          BlocProvider(
+            create: (context) => SearchDrinkCubit(getIt()),
           )
         ],
         child: MaterialApp(
