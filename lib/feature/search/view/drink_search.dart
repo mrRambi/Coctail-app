@@ -46,6 +46,7 @@ class _SearchTypeAheadDrinkState extends State<SearchTypeAheadDrink> {
             title: Text(itemData?.strDrink ?? 'no data'),
           );
         },
+        
         onSuggestionSelected: ((suggestion) {
           context
               .read<SearchDrinkCubit>()

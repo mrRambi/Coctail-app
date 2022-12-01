@@ -39,7 +39,6 @@ class DrinkScreen extends StatelessWidget {
             ),
           ),
         ),
-        
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -47,7 +46,7 @@ class DrinkScreen extends StatelessWidget {
               onPressed: () {
                 context.read<DrinkCubit>().fetchDrinks();
               },
-              child: const Text('download'),
+              child: const Text('download random'),
             ),
           ],
         ),

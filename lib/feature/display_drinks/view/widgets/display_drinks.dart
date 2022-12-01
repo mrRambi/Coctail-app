@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:recipe_app/feature/display_drinks/view/widgets/drink_page.dart';
 
 import 'package:recipe_app/feature/favorite/bloc/cubit/favorite_drink_of_user_cubit.dart';
 import 'package:recipe_app/feature/update_firestore_data.dart/cubit/update_current_user_data_cubit.dart';
@@ -27,44 +28,12 @@ class DisplayDrinks extends StatelessWidget {
         itemCount: _drinksData.length,
         itemBuilder: (context, index) {
           return InkWell(
-            onTap: () async {
-              return showDialog(
-                context: context,
-                builder: (ctx) => AlertDialog(
-                  title: Text(_drinksData[index]?.strDrink ?? ''),
-                  content: SizedBox(
-                    height: 200,
-                    width: 300,
-                    child: ListView.builder(
-                      itemCount: ing.length,
-                      itemBuilder: (context, index) {
-                        final measurence = meas[0]![index];
-                        final ingredience = ing[0]![index];
-                        final isIngNull =
-                            measurence == null || ingredience == null;
-
-                        return Column(
-                          children: [
-                            if (index == 0)
-                              Text(_drinksData[index]?.strInstructions ?? ''),
-                            if (isIngNull) const SizedBox(),
-                            if (!isIngNull) Text("$ingredience - $measurence"),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(ctx).pop();
-                      },
-                      child: const Text("Ok"),
-                    ),
-                  ],
-                ),
-              );
-            },
+            onTap: () async => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => DrinkPage(
+                          drink: _drinksData[index]!,
+                        ))),
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
               width: MediaQuery.of(context).size.width,
@@ -196,3 +165,42 @@ class DisplayDrinks extends StatelessWidget {
     );
   }
 }
+
+
+
+// showDialog(
+//                 context: context,
+//                 builder: (ctx) => AlertDialog(
+//                   title: Text(_drinksData[index]?.strDrink ?? ''),
+//                   content: SizedBox(
+//                     height: 200,
+//                     width: 300,
+//                     child: ListView.builder(
+//                       itemCount: ing.length,
+//                       itemBuilder: (context, index) {
+//                         final measurence = meas[0]![index];
+//                         final ingredience = ing[0]![index];
+//                         final isIngNull =
+//                             measurence == null || ingredience == null;
+
+//                         return Column(
+//                           children: [
+//                             if (index == 0)
+//                               Text(_drinksData[index]?.strInstructions ?? ''),
+//                             if (isIngNull) const SizedBox(),
+//                             if (!isIngNull) Text("$ingredience - $measurence"),
+//                           ],
+//                         );
+//                       },
+//                     ),
+//                   ),
+//                   actions: <Widget>[
+//                     TextButton(
+//                       onPressed: () {
+//                         Navigator.of(ctx).pop();
+//                       },
+//                       child: const Text("Ok"),
+//                     ),
+//                   ],
+//                 ),
+//               );
