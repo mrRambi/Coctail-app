@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recipe_app/feature/display_drinks/view/widgets/info_dialog.dart';
+import 'package:recipe_app/feature/display_drinks/view/widgets/user_page.dart';
 import 'package:recipe_app/feature/search/view/cubit/search_drink_cubit.dart';
-import 'package:recipe_app/utils/const.dart';
 import 'package:recipe_app/utils/extensions.dart';
 
 import '../../login/bloc/bloc/authentication_bloc.dart';
@@ -22,20 +22,9 @@ class DrinkScreen extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const SearchTypeAheadDrink(),
-            BlocBuilder<AuthenticationBloc, AuthenticationState>(
-              builder: (context, state) {
-                return state.map(
-                    unknown: (_) => const SizedBox(),
-                    authenticated: (_) => IconButton(
-                        onPressed: () => context
-                            .read<AuthenticationBloc>()
-                            .add(const AuthenticationEvent.logoutRequested()),
-                        icon: const Icon(Icons.account_circle)),
-                    unauthenticated: (_) => const SizedBox());
-              },
-            ),
+          children: const [
+            SearchTypeAheadDrink(),
+            UserPageButton(),
           ],
         ),
         const SizedBox(
@@ -64,6 +53,29 @@ class DrinkScreen extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class UserPageButton extends StatelessWidget {
+  const UserPageButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+      builder: (context, state) {
+        return state.map(
+            unknown: (_) => const SizedBox(),
+            authenticated: (_) => IconButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UserPage()));
+                },
+                icon: const Icon(Icons.account_circle)),
+            unauthenticated: (_) => const SizedBox());
+      },
     );
   }
 }

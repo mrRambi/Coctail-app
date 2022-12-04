@@ -65,7 +65,7 @@ class _SearchTypeAheadDrinkState extends State<SearchTypeAheadDrink> {
               return ListTile(
                 title: Text(
                   itemData?.strDrink ?? unknowData,
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: const TextStyle(color: Colors.white, fontSize: 20),
                 ),
               );
             },

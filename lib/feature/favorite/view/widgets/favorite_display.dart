@@ -56,7 +56,7 @@ class FavoriteDisplay extends StatelessWidget {
                         ),
                       )),
                   content: SizedBox(
-                      width: 250,
+                      width: 300,
                       height: 200,
                       child: SingleChildScrollView(
                         child: Column(
@@ -65,7 +65,7 @@ class FavoriteDisplay extends StatelessWidget {
                             Text(
                               drinksData[index].strInstructions ?? '',
                               style: const TextStyle(
-                                fontSize: 20,
+                                fontSize: 18,
                                 color: Colors.black,
                               ),
                             ),
@@ -74,10 +74,9 @@ class FavoriteDisplay extends StatelessWidget {
                             ),
                             SizedBox(
                               height: 200,
-                              width: 220,
+                              width: 250,
                               child: ListView.builder(
-                                // ignore: unnecessary_null_comparison
-                                itemCount: ing == null ? 0 : ing.length,
+                                itemCount: meas.length,
                                 itemBuilder: (context, index) {
                                   var meal = ing[index];
                                   var date = meas[index];
@@ -185,11 +184,11 @@ class FavoriteDisplay extends StatelessWidget {
                                         .read<UpdateCurrentUserDataCubit>()
                                         .removeFavorite(
                                             drinksData[index].idDrink!)
+                                        .then((value) =>
+                                            Navigator.of(context).pop())
                                         .then((value) => context
                                             .read<FavoriteDrinkOfUserCubit>()
-                                            .getFavoriteByApi())
-                                        .then((value) =>
-                                            Navigator.of(context).pop());
+                                            .getFavoriteByApi());
                                   },
                                 ),
                               ],

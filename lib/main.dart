@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, duplicate_ignore
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -52,18 +54,21 @@ class MyBlocObserver extends BlocObserver {
   @override
   void onCreate(BlocBase bloc) {
     super.onCreate(bloc);
+
     print('onCreate -- ${bloc.runtimeType}');
   }
 
   @override
   void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
+
     print('onEvent -- ${bloc.runtimeType}, $event');
   }
 
   @override
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
+
     print('onChange -- ${bloc.runtimeType}, $change');
   }
 
@@ -151,7 +156,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             canvasColor: Colors.grey[800],
             colorScheme: const ColorScheme.highContrastDark(),
-            textTheme: GoogleFonts.girassolTextTheme(
+            textTheme: GoogleFonts.interTextTheme(
               const TextTheme(
                 headline1: TextStyle(color: Colors.white),
                 headline6: TextStyle(color: Colors.white),

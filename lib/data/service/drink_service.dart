@@ -2,7 +2,6 @@ import 'package:injectable/injectable.dart';
 import 'package:recipe_app/data/remote_data_sources/drink_api.dart';
 
 import '../repositories/models/drinks_model/drink.dart';
-import '../repositories/models/drinks_model/drinks_data.dart';
 
 @singleton
 class DrinkService {

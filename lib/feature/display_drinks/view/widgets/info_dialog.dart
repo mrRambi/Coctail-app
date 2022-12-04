@@ -61,12 +61,11 @@ class InfoDialog extends StatelessWidget {
                               ),
                               borderRadius: BorderRadius.circular(15),
                               boxShadow: const [
-                                 BoxShadow(
-                                  
+                                BoxShadow(
                                   blurRadius: 5.0,
                                   spreadRadius: 5.0,
                                 ),
-                              ], 
+                              ],
                             ),
                             width: 200,
                             height: 200,
@@ -181,9 +180,7 @@ class InfoDialog extends StatelessWidget {
                                   child: ListView.builder(
                                     physics:
                                         const NeverScrollableScrollPhysics(),
-
-                                    // ignore: unnecessary_null_comparison
-                                    itemCount: ing == null ? 0 : ing.length,
+                                    itemCount: meas.length,
                                     itemBuilder: (context, index) {
                                       final measurence = meas[index];
                                       final ingredience = ing[index];

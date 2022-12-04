@@ -3,7 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:recipe_app/data/repositories/drink_repository.dart';
 
 import '../../../data/repositories/models/drinks_model/drink.dart';
-import '../../../data/repositories/models/drinks_model/drinks_data.dart';
 
 part 'drink_state.dart';
 part 'drink_cubit.freezed.dart';

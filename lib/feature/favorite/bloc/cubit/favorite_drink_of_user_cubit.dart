@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:recipe_app/data/remote_data_sources/current_user_repo.dart';
 import 'package:recipe_app/data/repositories/models/drinks_model/drink.dart';
-import 'package:recipe_app/data/repositories/models/drinks_model/drinks_data.dart';
 
 part 'favorite_drink_of_user_state.dart';
 part 'favorite_drink_of_user_cubit.freezed.dart';

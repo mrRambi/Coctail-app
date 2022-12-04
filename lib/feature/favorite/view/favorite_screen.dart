@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recipe_app/feature/favorite/view/widgets/favorite_display.dart';
 
 import '../../../di.dart';
-import '../../login/bloc/bloc/authentication_bloc.dart';
+import '../../display_drinks/view/drink_screen.dart';
 import '../bloc/cubit/favorite_drink_of_user_cubit.dart';
 
 class FavoriteScreen extends StatelessWidget {
@@ -19,20 +19,7 @@ class FavoriteScreen extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            BlocBuilder<AuthenticationBloc, AuthenticationState>(
-              builder: (context, state) {
-                return state.map(
-                    unknown: (_) => const SizedBox(),
-                    authenticated: (_) => IconButton(
-                        onPressed: () => context
-                            .read<AuthenticationBloc>()
-                            .add(const AuthenticationEvent.logoutRequested()),
-                        icon: const Icon(Icons.logout)),
-                    unauthenticated: (_) => const SizedBox());
-              },
-            ),
-          ],
+          children: const [UserPageButton()],
         ),
         Expanded(
           child:
