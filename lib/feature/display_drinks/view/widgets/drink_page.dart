@@ -66,7 +66,7 @@ class DrinkPage extends StatelessWidget {
             height: 200,
             width: 300,
             child: ListView.builder(
-              itemCount: ing.length,
+              itemCount: ing == null ? 0 : ing.length,
               itemBuilder: (context, index) {
                 final measurence = meas[index];
                 final ingredience = ing[index];

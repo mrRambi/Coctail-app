@@ -15,6 +15,7 @@ import 'data/remote_data_sources/drink_api.dart' as _i7;
 import 'data/remote_data_sources/firebase_repo.dart' as _i3;
 import 'data/remote_data_sources/firestore_repo.dart' as _i6;
 import 'data/repositories/drink_repository.dart' as _i10;
+import 'data/repositories/search_repo.dart' as _i11;
 import 'data/service/drink_service.dart'
     as _i8; // ignore_for_file: unnecessary_lambdas
 
@@ -51,5 +52,7 @@ _i1.GetIt $initGetIt(
       ));
   gh.factory<_i10.DrinkRepository>(
       () => _i10.DrinkRepository(drinkService: get<_i8.DrinkService>()));
+  gh.factory<_i11.SearchRepo>(
+      () => _i11.SearchRepo(drinkRepository: get<_i10.DrinkRepository>()));
   return get;
 }

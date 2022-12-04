@@ -3,5 +3,9 @@
     "@language": {
         "description": "The current Language"
     },
-    "favoriteButton": "Favorite"
+    "favoriteButton": "Favorite",
+    "chooseDrink": "Choose your drink",
+    "findUrDrink": "Find your drink",
+    "out": "Exit",
+    "next": "Next"
 }

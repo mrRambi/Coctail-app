@@ -1,5 +1,8 @@
 {
     "language": "Polski",
-    "favoriteButton": "Ulubione"
-
+    "favoriteButton": "Ulubione",
+    "chooseDrink": "Wybierz swój drink",
+    "findUrDrink": "Znajdź swój drink",
+    "out": "Zamknij",
+    "next": "Następny"
 }

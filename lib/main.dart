@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:recipe_app/data/remote_data_sources/current_user_repo.dart';
 import 'package:recipe_app/data/remote_data_sources/drink_api.dart';
@@ -15,7 +16,6 @@ import 'package:recipe_app/feature/login/bloc/bloc/authentication_bloc.dart';
 import 'package:recipe_app/feature/login/bloc/cubit/login_cubit.dart';
 import 'package:recipe_app/feature/login/view/widgets/login_form.dart';
 import 'package:recipe_app/feature/registration/cubit/sign_up_cubit.dart';
-import 'package:recipe_app/feature/search/view/drink_search.dart';
 
 import 'data/remote_data_sources/firebase_repo.dart';
 
@@ -137,11 +137,10 @@ class MyApp extends StatelessWidget {
                 UpdateCurrentUserDataCubit(getIt())..readUserColection(),
           ),
           BlocProvider(
-            create: (context) => SearchDrinkCubit(getIt()),
+            create: (context) => SearchDrinkCubit(getIt())..readFavorite(''),
           )
         ],
         child: MaterialApp(
-          title: 'Coctail app',
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
@@ -150,7 +149,15 @@ class MyApp extends StatelessWidget {
           ],
           supportedLocales: L10n.all,
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            canvasColor: Colors.grey[800],
+            colorScheme: const ColorScheme.highContrastDark(),
+            textTheme: GoogleFonts.girassolTextTheme(
+              const TextTheme(
+                headline1: TextStyle(color: Colors.white),
+                headline6: TextStyle(color: Colors.white),
+                bodyText2: TextStyle(color: Colors.white),
+              ),
+            ),
           ),
           home: const AppView(),
         ),
@@ -159,6 +166,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// GoogleFonts.girassolTextTheme(),
 class AppView extends StatefulWidget {
   const AppView({super.key});
 
@@ -172,6 +180,7 @@ class _AppViewState extends State<AppView> {
 
   void _onItemTapped(int index) {
     setState(() {
+      context.read<FavoriteDrinkOfUserCubit>().getFavoriteByApi();
       _selectedIndex = index;
     });
     controller.animateToPage(index,
@@ -181,58 +190,49 @@ class _AppViewState extends State<AppView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          BlocBuilder<AuthenticationBloc, AuthenticationState>(
-            builder: (context, state) {
-              return state.map(
-                  unknown: (_) => const SizedBox(),
-                  authenticated: (_) => IconButton(
-                      onPressed: () => context
-                          .read<AuthenticationBloc>()
-                          .add(const AuthenticationEvent.logoutRequested()),
-                      icon: const Icon(Icons.logout)),
-                  unauthenticated: (_) => const SizedBox());
-            },
+      backgroundColor: Colors.black54,
+      extendBody: true,
+      floatingActionButton: const CustomFloatingActionButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      extendBodyBehindAppBar: true,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.black, Color(0xFF0b0130), Color(0xFF190957)],
           ),
-        ],
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text('space for awesome icon'),
+        ),
+        child: PageView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: controller,
+          children: <Widget>[
+            const DrinkScreen(),
+            Builder(builder: (context) {
+              return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                builder: (context, state) {
+                  return state.map(
+                      unknown: (_) => BlocProvider(
+                            create: (context) => AuthenticationBloc(getIt()),
+                            child: const LoginForm(),
+                          ),
+                      authenticated: (_) => const FavoriteScreen(),
+                      unauthenticated: (_) => const LoginForm());
+                },
+              );
+            }),
           ],
         ),
       ),
-      body: PageView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: controller,
-        children: <Widget>[
-          const DrinkScreen(),
-          Builder(builder: (context) {
-            return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-              builder: (context, state) {
-                return state.map(
-                    unknown: (_) => BlocProvider(
-                          create: (context) => AuthenticationBloc(getIt()),
-                          child: const LoginForm(),
-                        ),
-                    authenticated: (_) => const FavoriteScreen(),
-                    unauthenticated: (_) => const LoginForm());
-              },
-            );
-          }),
-        ],
-      ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.black,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(Icons.loop_outlined),
+              icon: Icon(Icons.home_filled),
               backgroundColor: Colors.red,
-              label: 'Main Page'),
+              label: ''),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
+              icon: Icon(Icons.favorite),
               backgroundColor: Colors.blue,
-              label: 'Login Page'),
+              label: ''),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
