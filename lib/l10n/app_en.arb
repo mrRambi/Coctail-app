@@ -7,5 +7,7 @@
     "chooseDrink": "Choose your drink",
     "findUrDrink": "Find your drink",
     "out": "Exit",
-    "next": "Next"
+    "next": "Next",
+    "wannaDelete": "Do you really want to remove this drink from your favourites",
+    "yes": "Yes, remove it"
 }

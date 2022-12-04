@@ -20,21 +20,21 @@ mixin _$FavoriteDrinkOfUserState {
   TResult when<TResult extends Object?>({
     required TResult Function() favoriteLoading,
     required TResult Function(String message) favoriteLoadError,
-    required TResult Function(List<Drink>? data) favoriteLoadSuccess,
+    required TResult Function(List<Drink> data) favoriteLoadSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? favoriteLoading,
     TResult Function(String message)? favoriteLoadError,
-    TResult Function(List<Drink>? data)? favoriteLoadSuccess,
+    TResult Function(List<Drink> data)? favoriteLoadSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? favoriteLoading,
     TResult Function(String message)? favoriteLoadError,
-    TResult Function(List<Drink>? data)? favoriteLoadSuccess,
+    TResult Function(List<Drink> data)? favoriteLoadSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -122,7 +122,7 @@ class _$_FavoriteLoading implements _FavoriteLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() favoriteLoading,
     required TResult Function(String message) favoriteLoadError,
-    required TResult Function(List<Drink>? data) favoriteLoadSuccess,
+    required TResult Function(List<Drink> data) favoriteLoadSuccess,
   }) {
     return favoriteLoading();
   }
@@ -132,7 +132,7 @@ class _$_FavoriteLoading implements _FavoriteLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? favoriteLoading,
     TResult Function(String message)? favoriteLoadError,
-    TResult Function(List<Drink>? data)? favoriteLoadSuccess,
+    TResult Function(List<Drink> data)? favoriteLoadSuccess,
   }) {
     return favoriteLoading?.call();
   }
@@ -142,7 +142,7 @@ class _$_FavoriteLoading implements _FavoriteLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? favoriteLoading,
     TResult Function(String message)? favoriteLoadError,
-    TResult Function(List<Drink>? data)? favoriteLoadSuccess,
+    TResult Function(List<Drink> data)? favoriteLoadSuccess,
     required TResult orElse(),
   }) {
     if (favoriteLoading != null) {
@@ -258,7 +258,7 @@ class _$_FavoriteLoadError implements _FavoriteLoadError {
   TResult when<TResult extends Object?>({
     required TResult Function() favoriteLoading,
     required TResult Function(String message) favoriteLoadError,
-    required TResult Function(List<Drink>? data) favoriteLoadSuccess,
+    required TResult Function(List<Drink> data) favoriteLoadSuccess,
   }) {
     return favoriteLoadError(message);
   }
@@ -268,7 +268,7 @@ class _$_FavoriteLoadError implements _FavoriteLoadError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? favoriteLoading,
     TResult Function(String message)? favoriteLoadError,
-    TResult Function(List<Drink>? data)? favoriteLoadSuccess,
+    TResult Function(List<Drink> data)? favoriteLoadSuccess,
   }) {
     return favoriteLoadError?.call(message);
   }
@@ -278,7 +278,7 @@ class _$_FavoriteLoadError implements _FavoriteLoadError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? favoriteLoading,
     TResult Function(String message)? favoriteLoadError,
-    TResult Function(List<Drink>? data)? favoriteLoadSuccess,
+    TResult Function(List<Drink> data)? favoriteLoadSuccess,
     required TResult orElse(),
   }) {
     if (favoriteLoadError != null) {
@@ -336,7 +336,7 @@ abstract class _$$_FavoriteLoadSuccessCopyWith<$Res> {
   factory _$$_FavoriteLoadSuccessCopyWith(_$_FavoriteLoadSuccess value,
           $Res Function(_$_FavoriteLoadSuccess) then) =
       __$$_FavoriteLoadSuccessCopyWithImpl<$Res>;
-  $Res call({List<Drink>? data});
+  $Res call({List<Drink> data});
 }
 
 /// @nodoc
@@ -358,7 +358,7 @@ class __$$_FavoriteLoadSuccessCopyWithImpl<$Res>
       data == freezed
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<Drink>?,
+              as List<Drink>,
     ));
   }
 }
@@ -366,15 +366,13 @@ class __$$_FavoriteLoadSuccessCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_FavoriteLoadSuccess implements _FavoriteLoadSuccess {
-  const _$_FavoriteLoadSuccess(final List<Drink>? data) : _data = data;
+  const _$_FavoriteLoadSuccess(final List<Drink> data) : _data = data;
 
-  final List<Drink>? _data;
+  final List<Drink> _data;
   @override
-  List<Drink>? get data {
-    final value = _data;
-    if (value == null) return null;
+  List<Drink> get data {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_data);
   }
 
   @override
@@ -405,7 +403,7 @@ class _$_FavoriteLoadSuccess implements _FavoriteLoadSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() favoriteLoading,
     required TResult Function(String message) favoriteLoadError,
-    required TResult Function(List<Drink>? data) favoriteLoadSuccess,
+    required TResult Function(List<Drink> data) favoriteLoadSuccess,
   }) {
     return favoriteLoadSuccess(data);
   }
@@ -415,7 +413,7 @@ class _$_FavoriteLoadSuccess implements _FavoriteLoadSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? favoriteLoading,
     TResult Function(String message)? favoriteLoadError,
-    TResult Function(List<Drink>? data)? favoriteLoadSuccess,
+    TResult Function(List<Drink> data)? favoriteLoadSuccess,
   }) {
     return favoriteLoadSuccess?.call(data);
   }
@@ -425,7 +423,7 @@ class _$_FavoriteLoadSuccess implements _FavoriteLoadSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? favoriteLoading,
     TResult Function(String message)? favoriteLoadError,
-    TResult Function(List<Drink>? data)? favoriteLoadSuccess,
+    TResult Function(List<Drink> data)? favoriteLoadSuccess,
     required TResult orElse(),
   }) {
     if (favoriteLoadSuccess != null) {
@@ -470,10 +468,10 @@ class _$_FavoriteLoadSuccess implements _FavoriteLoadSuccess {
 }
 
 abstract class _FavoriteLoadSuccess implements FavoriteDrinkOfUserState {
-  const factory _FavoriteLoadSuccess(final List<Drink>? data) =
+  const factory _FavoriteLoadSuccess(final List<Drink> data) =
       _$_FavoriteLoadSuccess;
 
-  List<Drink>? get data;
+  List<Drink> get data;
   @JsonKey(ignore: true)
   _$$_FavoriteLoadSuccessCopyWith<_$_FavoriteLoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;

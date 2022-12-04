@@ -45,7 +45,7 @@ class CurrentUserRepo {
     return listOfString;
   }
 
-  Future<List<Drink>?> readUserToDrinkList() async {
+  Future<List<Drink>> readUserToDrinkList() async {
     final favoriteDrinks = await readUser();
 
     List listOfFavoriteDrinks = favoriteDrinks!['favoriteDrinks'] as List;
@@ -59,7 +59,7 @@ class CurrentUserRepo {
     return listOfDrink;
   }
 
-  Future<List<Drink>?> getDrinksApiByFirestoreFavorite() async {
+  Future<List<Drink>> getDrinksApiByFirestoreFavorite() async {
     final favoriteDrinks = await readUser();
 
     List listOfFavoriteDrinks = favoriteDrinks!['favoriteDrinks'] as List;
@@ -77,7 +77,6 @@ class CurrentUserRepo {
   Future<List<String>> addFavoriteDrinkToUser(String id) async {
     final favoriteDrinks = await readUserToStringList();
 
-  
     favoriteDrinks.add(id);
 
     await updateFavoriteDrinksList(favoriteDrinks);
@@ -88,7 +87,6 @@ class CurrentUserRepo {
   Future<List<String>> removeFavoriteDrinkToUser(String id) async {
     final favoriteDrinks = await readUserToStringList();
 
-  
     favoriteDrinks.remove(id);
 
     await updateFavoriteDrinksList(favoriteDrinks);

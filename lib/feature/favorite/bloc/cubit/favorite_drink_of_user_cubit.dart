@@ -15,8 +15,6 @@ class FavoriteDrinkOfUserCubit extends Cubit<FavoriteDrinkOfUserState> {
 
   final CurrentUserRepo _currentUserRepo;
 
-  
-
   Future<void> readFavorite() async {
     emit(const FavoriteDrinkOfUserState.favoriteLoading());
     try {

@@ -20,9 +20,7 @@ class FavoriteDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var ing = drinksData.map((e) => e.ingriedientProperties()).toList();
-    var meas = drinksData.map((e) => e.measureProperties()).toList();
-
+//
     return RefreshIndicator(
       onRefresh: () =>
           context.read<FavoriteDrinkOfUserCubit>().getFavoriteByApi(),
@@ -31,39 +29,78 @@ class FavoriteDisplay extends StatelessWidget {
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () async {
+              var ing = drinksData[index]
+                  .ingriedientProperties()
+                  .toList()
+                  .whereType<String>()
+                  .toList();
+              var meas = drinksData[index]
+                  .measureProperties()
+                  .toList()
+                  .whereType<String>()
+                  .toList();
+
               return showDialog(
                 context: context,
                 builder: (ctx) => AlertDialog(
-                  title: Text(drinksData[index].strDrink ?? ''),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25)),
+                  backgroundColor: Colors.white,
+                  title: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        drinksData[index].strDrink ?? '',
+                        style: const TextStyle(
+                          fontSize: 25,
+                          color: Colors.black,
+                        ),
+                      )),
                   content: SizedBox(
-                    height: 200,
-                    width: 150,
-                    child: ListView.builder(
-                      // itemCount: ing?.length,
-                      itemCount: 2,
-                      itemBuilder: (context, index) {
-                        final measurence = meas[0][index];
-                        final ingredience = ing[0][index];
-                        final isIngNull =
-                            measurence == null || ingredience == null;
-
-                        return Column(
+                      width: 250,
+                      height: 200,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            if (index == 0)
-                              Text(drinksData[index].strInstructions ?? ''),
-                            if (isIngNull) const SizedBox(),
-                            if (!isIngNull) Text("$ingredience - $measurence"),
+                            Text(
+                              drinksData[index].strInstructions ?? '',
+                              style: const TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            SizedBox(
+                              height: 200,
+                              width: 220,
+                              child: ListView.builder(
+                                // ignore: unnecessary_null_comparison
+                                itemCount: ing == null ? 0 : ing.length,
+                                itemBuilder: (context, index) {
+                                  var meal = ing[index];
+                                  var date = meas[index];
+                                  return Text(
+                                    " $meal - $date",
+                                    style: const TextStyle(
+                                      fontSize: 17,
+                                      color: Colors.black,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
                           ],
-                        );
-                      },
-                    ),
-                  ),
+                        ),
+                      )),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
                         Navigator.of(ctx).pop();
                       },
-                      child: const Text("Ok"),
+                      child: Text(context.loc.out,
+                          style: const TextStyle(color: Colors.black)),
                     ),
                   ],
                 ),
@@ -72,7 +109,7 @@ class FavoriteDisplay extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
               width: MediaQuery.of(context).size.width,
-              height: 200,
+              height: 250,
               decoration: BoxDecoration(
                 color: Colors.black,
                 borderRadius: BorderRadius.circular(15),
@@ -89,7 +126,7 @@ class FavoriteDisplay extends StatelessWidget {
                 ],
                 image: DecorationImage(
                   colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(0.35),
+                    Colors.black.withOpacity(0.1),
                     BlendMode.multiply,
                   ),
                   image: NetworkImage(
@@ -99,98 +136,84 @@ class FavoriteDisplay extends StatelessWidget {
               ),
               child: Stack(
                 children: [
-                  const Align(
-                    alignment: Alignment.center,
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.close,
+                        size: 35,
+                      ),
+                      onPressed: () async {
+                        return showDialog<void>(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25)),
+                              backgroundColor: Colors.white,
+                              title: Text(
+                                context.loc.wannaDelete,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 25,
+                                ),
+                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: Text(
+                                    context.loc.out,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                TextButton(
+                                  child: Text(
+                                    context.loc.yes,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    context
+                                        .read<UpdateCurrentUserDataCubit>()
+                                        .removeFavorite(
+                                            drinksData[index].idDrink!)
+                                        .then((value) => context
+                                            .read<FavoriteDrinkOfUserCubit>()
+                                            .getFavoriteByApi())
+                                        .then((value) =>
+                                            Navigator.of(context).pop());
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
                       child: Text(
-                        // drinksData.drinks?[index].strDrink ?? 'drink name',
-                        '',
-                        style: TextStyle(
+                        drinksData[index].strDrink ?? '',
+                        style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 30,
+                          fontSize: 25,
                         ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         textAlign: TextAlign.center,
                       ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(5),
-                          margin: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.4),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Row(
-                            children: [
-                              BlocBuilder<FavoriteDrinkOfUserCubit,
-                                  FavoriteDrinkOfUserState>(
-                                builder: (context, state) {
-                                  return state.when(
-                                    favoriteLoading: () => IconButton(
-                                        onPressed: () {},
-                                        icon:
-                                            const Icon(Icons.favorite_outline),
-                                        color: Colors.white,
-                                        iconSize: 18),
-                                    favoriteLoadError: (e) => Text(e),
-                                    favoriteLoadSuccess: (value) => IconButton(
-                                        onPressed: () => showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) =>
-                                                  AlertDialog(
-                                                title: const Text(
-                                                    'AlertDialog Title'),
-                                                content: const Text(
-                                                    'AlertDialog description'),
-                                                actions: <Widget>[
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            context, 'Cancel'),
-                                                    child: const Text('Cancel'),
-                                                  ),
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      context
-                                                          .read<
-                                                              UpdateCurrentUserDataCubit>()
-                                                          .removeFavorite(
-                                                              drinksData[index]
-                                                                  .idDrink
-                                                                  .toString());
-                                                      Navigator.pop(
-                                                          context, 'OK');
-                                                    },
-                                                    child: const Text('OK'),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                        icon: const Icon(Icons.delete_outline),
-                                        color: Colors.white,
-                                        iconSize: 18),
-                                  );
-                                },
-                              ),
-                              const SizedBox(width: 7),
-                              Text(
-                                context.loc.favoriteButton,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
                     ),
                   ),
                 ],

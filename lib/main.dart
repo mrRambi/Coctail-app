@@ -166,7 +166,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// GoogleFonts.girassolTextTheme(),
 class AppView extends StatefulWidget {
   const AppView({super.key});
 

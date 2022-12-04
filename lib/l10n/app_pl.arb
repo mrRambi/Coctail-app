@@ -4,5 +4,7 @@
     "chooseDrink": "Wybierz swój drink",
     "findUrDrink": "Znajdź swój drink",
     "out": "Zamknij",
-    "next": "Następny"
+    "next": "Następny",
+    "wannaDelete": "Czy naprawdę chcesz usunąć ten drink z Twoich ulubionych",
+    "yes": "Tak, chcę usunąć"
 }

@@ -5,6 +5,6 @@ class FavoriteDrinkOfUserState with _$FavoriteDrinkOfUserState {
   const factory FavoriteDrinkOfUserState.favoriteLoading() = _FavoriteLoading;
   const factory FavoriteDrinkOfUserState.favoriteLoadError(String message) =
       _FavoriteLoadError;
-  const factory FavoriteDrinkOfUserState.favoriteLoadSuccess(
-      List<Drink>? data) = _FavoriteLoadSuccess;
+  const factory FavoriteDrinkOfUserState.favoriteLoadSuccess(List<Drink> data) =
+      _FavoriteLoadSuccess;
 }

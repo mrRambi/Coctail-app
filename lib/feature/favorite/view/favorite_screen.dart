@@ -43,7 +43,7 @@ class FavoriteScreen extends StatelessWidget {
               favoriteLoadError: (e) => Text(e),
               favoriteLoadSuccess: (data) => FavoriteDisplay(
                 currentUserRepo: getIt(),
-                drinksData: data ?? [],
+                drinksData: data,
               ),
             ),
           ),
