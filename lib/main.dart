@@ -41,8 +41,8 @@ Future<void> main() async {
   await authenticationRepository.user.first;
 
   await dotenv.load(fileName: ".env");
+
   final currentUserRepo = CurrentUserRepo(getIt());
-  await currentUserRepo.getDrinksApiByFirestoreFavorite();
 
   runApp(MyApp(
     authenticationRepository: authenticationRepository,
@@ -127,7 +127,7 @@ class MyApp extends StatelessWidget {
             create: (context) => AuthenticationBloc(_authenticationRepository),
           ),
           BlocProvider(
-            create: (context) => LoginCubit(_authenticationRepository),
+            create: (context) => LoginCubit(_authenticationRepository, getIt()),
           ),
           BlocProvider(
             create: (context) =>
@@ -146,6 +146,7 @@ class MyApp extends StatelessWidget {
           )
         ],
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
@@ -156,7 +157,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             canvasColor: Colors.grey[800],
             colorScheme: const ColorScheme.highContrastDark(),
-            textTheme: GoogleFonts.interTextTheme(
+            textTheme: GoogleFonts.lobsterTextTheme(
               const TextTheme(
                 headline1: TextStyle(color: Colors.white),
                 headline6: TextStyle(color: Colors.white),

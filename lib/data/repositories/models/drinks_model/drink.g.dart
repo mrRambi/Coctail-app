@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: non_constant_identifier_names
+
 part of 'drink.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-// ignore: non_constant_identifier_names
 _$_Drink _$$_DrinkFromJson(Map<String, dynamic> json) => _$_Drink(
       idDrink: json['idDrink'] as String?,
       strDrink: json['strDrink'] as String?,
@@ -62,7 +63,6 @@ _$_Drink _$$_DrinkFromJson(Map<String, dynamic> json) => _$_Drink(
       dateModified: json['dateModified'] as String?,
     );
 
-// ignore: non_constant_identifier_names
 Map<String, dynamic> _$$_DrinkToJson(_$_Drink instance) => <String, dynamic>{
       'idDrink': instance.idDrink,
       'strDrink': instance.strDrink,

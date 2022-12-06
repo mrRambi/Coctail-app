@@ -30,7 +30,7 @@ class LoginForm extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('logo here or animation'),
+              const Text('Drink finder'),
               const SizedBox(height: 16),
               _EmailInput(),
               const SizedBox(height: 8),

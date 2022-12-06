@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../data/repositories/models/drinks_model/drink.dart';
 import '../../../../utils/const.dart';
+import '../../../login/bloc/bloc/authentication_bloc.dart';
 import '../../../update_firestore_data.dart/cubit/update_current_user_data_cubit.dart';
 
 class DrinkPage extends StatelessWidget {
@@ -28,6 +29,7 @@ class DrinkPage extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
                   image: DecorationImage(
                     image:
                         NetworkImage(drink.strDrinkThumb ?? linkDrinkPicture),
@@ -51,55 +53,69 @@ class DrinkPage extends StatelessWidget {
                           )),
                     ),
                     Align(
-                      alignment: Alignment.bottomRight,
-                      child: BlocBuilder<UpdateCurrentUserDataCubit,
-                          UpdateCurrentUserDataState>(
-                        builder: (context, state) {
-                          return state.when(
-                            currentUserDataLoading: () => IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.favorite_outline,
-                                  size: 30,
-                                ),
-                                color: Colors.white,
-                                iconSize: 30),
-                            currentUserDataError: (e) => Text(e),
-                            currentUserDataLoadSuccess: (value) => SizedBox(
-                              child: (!value.contains(drink.idDrink.toString()))
-                                  ? IconButton(
-                                      onPressed: () {
-                                        context
-                                            .read<UpdateCurrentUserDataCubit>()
-                                            .addFavorite(
-                                                drink.idDrink.toString());
-                                      },
-                                      icon: const Icon(
-                                        Icons.favorite_outline,
-                                        size: 30,
-                                      ),
-                                      color: Colors.white,
-                                      iconSize: 30,
-                                    )
-                                  : IconButton(
-                                      onPressed: () {
-                                        context
-                                            .read<UpdateCurrentUserDataCubit>()
-                                            .removeFavorite(
-                                                drink.idDrink.toString());
-                                      },
-                                      icon: const Icon(
-                                        Icons.favorite,
-                                        size: 30,
-                                      ),
-                                      color: Colors.white,
-                                      iconSize: 30,
+                        alignment: Alignment.bottomRight,
+                        child: BlocBuilder<AuthenticationBloc,
+                            AuthenticationState>(
+                          builder: (context, state) {
+                            return state.map(
+                              unknown: (_) => const SizedBox(),
+                              unauthenticated: (_) => const SizedBox(),
+                              authenticated: (_) => BlocBuilder<
+                                  UpdateCurrentUserDataCubit,
+                                  UpdateCurrentUserDataState>(
+                                builder: (context, state) {
+                                  return state.when(
+                                    currentUserDataLoading: () => IconButton(
+                                        onPressed: () {},
+                                        icon: const Icon(
+                                          Icons.favorite_outline,
+                                          size: 30,
+                                        ),
+                                        color: Colors.white,
+                                        iconSize: 30),
+                                    currentUserDataError: (e) => Text(e),
+                                    currentUserDataLoadSuccess: (value) =>
+                                        SizedBox(
+                                      child: (!value.contains(
+                                              drink.idDrink.toString()))
+                                          ? IconButton(
+                                              onPressed: () {
+                                                context
+                                                    .read<
+                                                        UpdateCurrentUserDataCubit>()
+                                                    .addFavorite(drink.idDrink
+                                                        .toString());
+                                              },
+                                              icon: const Icon(
+                                                Icons.favorite_outline,
+                                                size: 30,
+                                              ),
+                                              color: Colors.white,
+                                              iconSize: 30,
+                                            )
+                                          : IconButton(
+                                              onPressed: () {
+                                                context
+                                                    .read<
+                                                        UpdateCurrentUserDataCubit>()
+                                                    .removeFavorite(drink
+                                                        .idDrink
+                                                        .toString());
+                                              },
+                                              icon: const Icon(
+                                                Icons.favorite,
+                                                size: 30,
+                                              ),
+                                              color: Colors.white,
+                                              iconSize: 30,
+                                            ),
                                     ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        )),
                   ],
                 ),
               ),
@@ -118,31 +134,31 @@ class DrinkPage extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    child: Text(
-                      'Category: ',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
+              SizedBox(
+                width: 340,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      child: Text(
+                        'Category: ',
+                        style: TextStyle(
+                          color: Colors.amberAccent,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    child: Text(
-                      drink.strAlcoholic ?? '',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
+                    SizedBox(
+                      child: Text(
+                        drink.strAlcoholic ?? '',
+                        style: const TextStyle(
+                          color: Colors.amberAccent,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 10,
@@ -159,7 +175,7 @@ class DrinkPage extends StatelessWidget {
               ),
               SizedBox(
                 height: 120,
-                width: 300,
+                width: 340,
                 child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: meas.length,
@@ -169,6 +185,7 @@ class DrinkPage extends StatelessWidget {
                     final isIngNull = measurence == null || ingredience == null;
 
                     return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         if (!isIngNull)
                           Text(

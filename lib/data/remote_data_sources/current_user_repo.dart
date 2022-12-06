@@ -29,7 +29,7 @@ class CurrentUserRepo {
     }
   }
 
-  Future<Map<String, dynamic>?> readUser() async {
+  Future<Map<String, dynamic>?> readUserDocument() async {
     return await _dataFireStoreRepo.readDocument(
       collectionName: usersCollection,
       documentName: userId ?? 'no data',
@@ -37,18 +37,18 @@ class CurrentUserRepo {
   }
 
   Future<List<String>> readUserToStringList() async {
-    final favoriteDrinks = await readUser();
-
-    List listOfFavoriteDrinks = favoriteDrinks!['favoriteDrinks'] as List;
+    final favoriteDrinks = await readUserDocument();
+    if (favoriteDrinks == null) return [];
+    List listOfFavoriteDrinks = favoriteDrinks['favoriteDrinks'] as List;
     final listOfString = listOfFavoriteDrinks.map((e) => e.toString()).toList();
 
     return listOfString;
   }
 
   Future<List<Drink>> readUserToDrinkList() async {
-    final favoriteDrinks = await readUser();
+    final favoriteDrinks = await readUserDocument();
 
-    List listOfFavoriteDrinks = favoriteDrinks!['favoriteDrinks'] as List;
+    List listOfFavoriteDrinks = favoriteDrinks?['favoriteDrinks'] as List;
     final l = listOfFavoriteDrinks.map((e) => e.toString()).toList();
     List<Drink>? listOfDrink = [];
     for (var i in l) {
@@ -60,7 +60,7 @@ class CurrentUserRepo {
   }
 
   Future<List<Drink>> getDrinksApiByFirestoreFavorite() async {
-    final favoriteDrinks = await readUser();
+    final favoriteDrinks = await readUserDocument();
 
     List listOfFavoriteDrinks = favoriteDrinks!['favoriteDrinks'] as List;
     final l = listOfFavoriteDrinks.map((e) => e.toString()).toList();

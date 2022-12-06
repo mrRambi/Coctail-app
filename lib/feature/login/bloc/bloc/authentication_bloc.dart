@@ -28,6 +28,7 @@ class AuthenticationBloc
     Emitter<AuthenticationState> emit,
   ) async {
     await event.map(userChanged: (event) async {
+      print(event.user);
       emit(event.user == null
           ? const AuthenticationState.unauthenticated()
           : AuthenticationState.authenticated(event.user!));

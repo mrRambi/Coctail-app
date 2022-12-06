@@ -60,7 +60,6 @@ class FavoriteDisplay extends StatelessWidget {
                       height: 200,
                       child: SingleChildScrollView(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
                               drinksData[index].strInstructions ?? '',
@@ -76,6 +75,7 @@ class FavoriteDisplay extends StatelessWidget {
                               height: 200,
                               width: 250,
                               child: ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
                                 itemCount: meas.length,
                                 itemBuilder: (context, index) {
                                   var meal = ing[index];

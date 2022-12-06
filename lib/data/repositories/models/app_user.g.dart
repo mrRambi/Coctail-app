@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: non_constant_identifier_names
+
 part of 'app_user.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-// ignore: non_constant_identifier_names
 _$_AppUser _$$_AppUserFromJson(Map<String, dynamic> json) => _$_AppUser(
       id: json['id'] as String,
       email: json['email'] as String,
@@ -15,7 +16,6 @@ _$_AppUser _$$_AppUserFromJson(Map<String, dynamic> json) => _$_AppUser(
           .toList(),
     );
 
-// ignore: non_constant_identifier_names
 Map<String, dynamic> _$$_AppUserToJson(_$_AppUser instance) =>
     <String, dynamic>{
       'id': instance.id,

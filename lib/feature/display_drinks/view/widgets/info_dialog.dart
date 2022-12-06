@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recipe_app/utils/extensions.dart';
 
 import '../../../../utils/const.dart';
+import '../../../login/bloc/bloc/authentication_bloc.dart';
 import '../../../update_firestore_data.dart/cubit/update_current_user_data_cubit.dart';
 import '../../cubit/drink_cubit.dart';
 
@@ -49,87 +50,101 @@ class InfoDialog extends StatelessWidget {
                           height: 5,
                         ),
                         Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                colorFilter: ColorFilter.mode(
-                                  Colors.black.withOpacity(0.07),
-                                  BlendMode.multiply,
-                                ),
-                                image: NetworkImage(
-                                    data[0].strDrinkThumb ?? linkDrinkPicture),
-                                fit: BoxFit.cover,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              colorFilter: ColorFilter.mode(
+                                Colors.black.withOpacity(0.07),
+                                BlendMode.multiply,
                               ),
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: const [
-                                BoxShadow(
-                                  blurRadius: 5.0,
-                                  spreadRadius: 5.0,
-                                ),
-                              ],
+                              image: NetworkImage(
+                                  data[0].strDrinkThumb ?? linkDrinkPicture),
+                              fit: BoxFit.cover,
                             ),
-                            width: 200,
-                            height: 200,
-                            child: Stack(
-                              children: [
-                                Align(
-                                  alignment: Alignment.topRight,
-                                  child: BlocBuilder<UpdateCurrentUserDataCubit,
-                                      UpdateCurrentUserDataState>(
-                                    builder: (context, state) {
-                                      return state.when(
-                                        currentUserDataLoading: () =>
-                                            IconButton(
-                                                onPressed: () {},
-                                                icon: const Icon(
-                                                  Icons.favorite_outline,
-                                                  size: 22,
-                                                ),
-                                                color: Colors.white,
-                                                iconSize: 18),
-                                        currentUserDataError: (e) => Text(e),
-                                        currentUserDataLoadSuccess: (value) =>
-                                            SizedBox(
-                                          child: (!value.contains(
-                                                  data[0].idDrink.toString()))
-                                              ? IconButton(
-                                                  onPressed: () {
-                                                    context
-                                                        .read<
-                                                            UpdateCurrentUserDataCubit>()
-                                                        .addFavorite(data[0]
-                                                            .idDrink
-                                                            .toString());
-                                                  },
-                                                  icon: const Icon(
-                                                    Icons.favorite_outline,
-                                                    size: 20,
-                                                  ),
-                                                  color: Colors.white,
-                                                  iconSize: 20,
-                                                )
-                                              : IconButton(
-                                                  onPressed: () {
-                                                    context
-                                                        .read<
-                                                            UpdateCurrentUserDataCubit>()
-                                                        .removeFavorite(data[0]
-                                                            .idDrink
-                                                            .toString());
-                                                  },
-                                                  icon: const Icon(
-                                                    Icons.favorite,
-                                                    size: 20,
-                                                  ),
-                                                  color: Colors.white,
-                                                  iconSize: 20,
-                                                ),
-                                        ),
-                                      );
-                                    },
-                                  ),
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: const [
+                              BoxShadow(
+                                blurRadius: 5.0,
+                                spreadRadius: 5.0,
+                              ),
+                            ],
+                          ),
+                          width: 200,
+                          height: 200,
+                          child: Stack(
+                            children: [
+                              Align(
+                                alignment: Alignment.topRight,
+                                child: BlocBuilder<AuthenticationBloc,
+                                    AuthenticationState>(
+                                  builder: (context, state) {
+                                    return state.map(
+                                      unknown: (_) => const SizedBox(),
+                                      unauthenticated: (_) => const SizedBox(),
+                                      authenticated: (_) => BlocBuilder<
+                                          UpdateCurrentUserDataCubit,
+                                          UpdateCurrentUserDataState>(
+                                        builder: (context, state) {
+                                          return state.when(
+                                            currentUserDataLoading: () =>
+                                                IconButton(
+                                                    onPressed: () {},
+                                                    icon: const Icon(
+                                                      Icons.favorite_outline,
+                                                      size: 22,
+                                                    ),
+                                                    color: Colors.white,
+                                                    iconSize: 18),
+                                            currentUserDataError: (e) =>
+                                                Text(e),
+                                            currentUserDataLoadSuccess:
+                                                (value) => SizedBox(
+                                              child: (!value.contains(data[0]
+                                                      .idDrink
+                                                      .toString()))
+                                                  ? IconButton(
+                                                      onPressed: () {
+                                                        context
+                                                            .read<
+                                                                UpdateCurrentUserDataCubit>()
+                                                            .addFavorite(data[0]
+                                                                .idDrink
+                                                                .toString());
+                                                      },
+                                                      icon: const Icon(
+                                                        Icons.favorite_outline,
+                                                        size: 20,
+                                                      ),
+                                                      color: Colors.white,
+                                                      iconSize: 20,
+                                                    )
+                                                  : IconButton(
+                                                      onPressed: () {
+                                                        context
+                                                            .read<
+                                                                UpdateCurrentUserDataCubit>()
+                                                            .removeFavorite(
+                                                                data[0]
+                                                                    .idDrink
+                                                                    .toString());
+                                                      },
+                                                      icon: const Icon(
+                                                        Icons.favorite,
+                                                        size: 20,
+                                                      ),
+                                                      color: Colors.white,
+                                                      iconSize: 20,
+                                                    ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
                                 ),
-                              ],
-                            )),
+                              )
+                            ],
+                          ),
+                        ),
                         const SizedBox(height: 10),
                         SizedBox(
                           width: 280,
