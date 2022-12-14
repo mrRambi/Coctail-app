@@ -15,20 +15,20 @@ class AuthenticationBloc
   AuthenticationBloc(this._authenticationRepository)
       : super(const AuthenticationState.unknown()) {
     on<AuthenticationEvent>(_onEvent);
-    _userSubscription = _authenticationRepository.user.listen(
+    userSubscription = _authenticationRepository.user.listen(
       (user) => add(AuthenticationEvent.userChanged(user)),
     );
   }
 
   final AuthenticationRepository _authenticationRepository;
-  late final StreamSubscription<AppUser?> _userSubscription;
+  late final StreamSubscription<AppUser?> userSubscription;
+  late final StreamController<AppUser?> userController;
 
   void _onEvent(
     AuthenticationEvent event,
     Emitter<AuthenticationState> emit,
   ) async {
     await event.map(userChanged: (event) async {
-      print(event.user);
       emit(event.user == null
           ? const AuthenticationState.unauthenticated()
           : AuthenticationState.authenticated(event.user!));
@@ -37,9 +37,17 @@ class AuthenticationBloc
     });
   }
 
+  void logOutUser() {
+    _authenticationRepository.logOut();
+  }
+
+  Stream<AppUser?> isLoged() {
+    return _authenticationRepository.user;
+  }
+
   @override
   Future<void> close() {
-    _userSubscription.cancel();
+    userSubscription.cancel();
     return super.close();
   }
 }

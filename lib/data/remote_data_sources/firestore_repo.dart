@@ -19,7 +19,7 @@ class DataFireStoreRepo {
     }
   }
 
-  Future<Stream> readCollection({required String collectionName}) async =>
+  Stream readCollection({required String collectionName}) =>
       FirebaseFirestore.instance
           .collection(collectionName)
           .snapshots()
@@ -28,7 +28,7 @@ class DataFireStoreRepo {
   Future<Map<String, dynamic>?> readDocument(
           {required String collectionName,
           required String documentName}) async =>
-      FirebaseFirestore.instance
+      await FirebaseFirestore.instance
           .collection(collectionName)
           .doc(documentName)
           .get()

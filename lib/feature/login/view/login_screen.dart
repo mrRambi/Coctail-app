@@ -8,8 +8,9 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const Padding(
+    return const Scaffold(
+      backgroundColor: Colors.black,
+      body: Padding(
         padding: EdgeInsets.all(8),
         child: LoginForm(),
       ),

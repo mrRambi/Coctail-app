@@ -14,13 +14,14 @@ class SearchDrinkCubit extends Cubit<SearchDrinkState> {
   final DrinkRepository _drinkRepository;
 
   Future<void> readFavorite(String nameOfDrink) async {
-    emit(const SearchDrinkState.searchedDrinkLoading());
     try {
-      final data = await _drinkRepository.searchDrinkByName(nameOfDrink);
+      final List<Drink?>? data =
+          await _drinkRepository.searchDrinkByName(nameOfDrink);
 
       emit(SearchDrinkState.searchedDrinkLoadSuccess(data));
     } catch (e) {
-      emit(SearchDrinkState.searchedDrinkLoadError(e.toString()));
+      const String mess = 'Sorry';
+      emit(const SearchDrinkState.searchedDrinkLoadError(mess));
     }
   }
 }

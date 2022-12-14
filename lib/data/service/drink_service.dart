@@ -11,12 +11,12 @@ class DrinkService {
     required DrinkApi drinkApi,
   }) : _drinkApi = drinkApi;
 
-  Future<List<Drink>?> fetchDrinkFromSever() =>
-      _drinkApi.fetchDrinkFromSever('random.php');
+  Future<List<Drink?>?> fetchDrinkFromSever() async =>
+      await _drinkApi.fetchDrinkFromSever('random.php');
 
-  Future<List<Drink>?> fetchDrinkByIdFromSever(String idOfDrink) =>
-      _drinkApi.fetchDrinkFromSever('lookup.php?i=$idOfDrink');
+  Future<List<Drink?>?> fetchDrinkByIdFromSever(String idOfDrink) async =>
+      await _drinkApi.fetchDrinkFromSever('lookup.php?i=$idOfDrink');
 
-  Future<List<Drink>?> searchDrinkByName(String nameOfDrink) =>
-      _drinkApi.fetchDrinkFromSever('search.php?s=$nameOfDrink');
+  Future<List<Drink?>?> searchDrinkByName(String nameOfDrink) async =>
+      await _drinkApi.fetchDrinkFromSever('search.php?s=$nameOfDrink');
 }

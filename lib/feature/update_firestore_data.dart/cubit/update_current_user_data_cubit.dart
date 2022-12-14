@@ -13,7 +13,7 @@ class UpdateCurrentUserDataCubit extends Cubit<UpdateCurrentUserDataState> {
   final CurrentUserRepo _currentUserRepo;
 
   Future<void> readUserColection() async {
-    emit(const UpdateCurrentUserDataState.currentUserDataLoading());
+    // emit(const UpdateCurrentUserDataState.currentUserDataLoading());
     try {
       final data = await _currentUserRepo.readUserToStringList();
 
@@ -24,7 +24,7 @@ class UpdateCurrentUserDataCubit extends Cubit<UpdateCurrentUserDataState> {
   }
 
   Future<void> addFavorite(String id) async {
-    emit(const UpdateCurrentUserDataState.currentUserDataLoading());
+    // emit(const UpdateCurrentUserDataState.currentUserDataLoading());
     try {
       final data = await _currentUserRepo.addFavoriteDrinkToUser(id);
 
@@ -35,7 +35,7 @@ class UpdateCurrentUserDataCubit extends Cubit<UpdateCurrentUserDataState> {
   }
 
   Future<void> removeFavorite(String id) async {
-    emit(const UpdateCurrentUserDataState.currentUserDataLoading());
+    // emit(const UpdateCurrentUserDataState.currentUserDataLoading());
     try {
       final data = await _currentUserRepo.removeFavoriteDrinkToUser(id);
       emit(UpdateCurrentUserDataState.currentUserDataLoadSuccess(data));

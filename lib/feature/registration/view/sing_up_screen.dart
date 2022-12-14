@@ -16,11 +16,13 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(title: const Text('Sign Up')),
       body: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(20),
         child: BlocProvider<SignUpCubit>(
-          create: (_) => SignUpCubit(context.read<AuthenticationRepository>(), context.read<CurrentUserRepo>() ),
+          create: (_) => SignUpCubit(context.read<AuthenticationRepository>(),
+              context.read<CurrentUserRepo>()),
           child: const SignUpForm(),
         ),
       ),

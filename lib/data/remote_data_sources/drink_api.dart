@@ -6,11 +6,10 @@ import 'package:injectable/injectable.dart';
 
 import '../repositories/models/drinks_model/drink.dart';
 
-
 @injectable
 class DrinkApi {
   @factoryMethod
-  Future<List<Drink>?> fetchDrinkFromSever(String parametr) async {
+  Future<List<Drink?>?> fetchDrinkFromSever(String parametr) async {
     String url = dotenv.get('API_URL');
     String uri = '$url$parametr';
     final result = await http.Client()
@@ -20,9 +19,11 @@ class DrinkApi {
 
       var postModel = jsonDecode(models);
 
+      if (postModel['drinks'] == null) return [];
+
       final mapOfDrinksToList = postModel['drinks'] as List;
 
-      List<Drink>? listOfDrinks = mapOfDrinksToList
+      List<Drink?>? listOfDrinks = mapOfDrinksToList
           .map((e) => Drink.fromJson(e as Map<String, dynamic>))
           .toList();
 

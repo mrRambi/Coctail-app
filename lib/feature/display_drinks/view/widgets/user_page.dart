@@ -1,6 +1,7 @@
 import 'package:auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:recipe_app/main.dart';
 
 import '../../../login/bloc/bloc/authentication_bloc.dart';
 
@@ -10,73 +11,72 @@ class UserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      // backgroundColor: Colors.white,
-      child: ColoredBox(
-        color: Colors.white,
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 15,
-            ),
-            Align(
-              heightFactor: 5,
-              widthFactor: 8,
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                  onPressed: () => Navigator.pop(context),
-                  icon: const Icon(
-                    Icons.arrow_back_sharp,
-                    color: Colors.black,
-                    size: 40,
-                  )),
-            ),
-            Center(
-                child: Container(
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.6),
-                    offset: const Offset(
-                      0.0,
-                      0.0,
-                    ),
-                    blurRadius: 5.0,
-                    spreadRadius: 5.0,
-                  ),
-                ],
+    return SafeArea(
+      top: true,
+      child: Material(
+        child: ColoredBox(
+          color: Colors.black,
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 15,
               ),
-              width: 320,
-              height: 140,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    'Email:  $userEmail',
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.redAccent[700],
-                      disabledForegroundColor: Colors.grey.withOpacity(0.25),
-                    ),
-                    onPressed: () {
-                      context
-                          .read<AuthenticationBloc>()
-                          .add(const AuthenticationEvent.logoutRequested());
-                    },
-                    child: const Text(
-                      'Logout',
-                      style: TextStyle(fontSize: 20),
-                    ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(
+                          Icons.arrow_back_sharp,
+                          color: Colors.white,
+                          size: 40,
+                        )),
                   ),
                 ],
               ),
-            )),
-          ],
+              Center(
+                  child: SizedBox(
+                width: double.infinity,
+                height: 300,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        'Email:  $userEmail',
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.redAccent[700],
+                        disabledForegroundColor: Colors.grey.withOpacity(0.25),
+                      ),
+                      onPressed: () {
+                        context
+                            .read<AuthenticationBloc>()
+                            .add(const AuthenticationEvent.logoutRequested());
+
+                        Navigator.of(context).pushAndRemoveUntil<void>(
+                            MaterialPageRoute<void>(
+                                builder: (BuildContext context) =>
+                                    const AppView()),
+                            (Route<dynamic> route) => false);
+                      },
+                      child: const Text(
+                        'Logout',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ],
+                ),
+              )),
+            ],
+          ),
         ),
       ),
     );

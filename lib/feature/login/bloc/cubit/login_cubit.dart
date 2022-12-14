@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -52,6 +54,18 @@ class LoginCubit extends Cubit<LoginState> {
         password: state.password.value,
       );
       await currentUserRepo.readUserDocument();
+      await currentUserRepo.getDrinksApiByFirestoreFavorite();
+
+      // (print('$user asdasdasdasdasdasdasdasddddddddddddddddddddd'));
+
+      // if (user == null) return;
+      // if (user['favoriteDrinks'] == null) {
+      //   user['favoriteDrinks'] = [];
+      //   final userData = AppUser.fromJson(user);
+      //   currentUserRepo.creatUser(userData);
+      // } else {
+      //   currentUserRepo.creatUser(AppUser.fromJson(user));
+      // }
 
       emit(state.copyWith(status: FormzStatus.submissionSuccess));
     } on LogInWithEmailAndPasswordFailure {
@@ -69,17 +83,23 @@ class LoginCubit extends Cubit<LoginState> {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {
       await _authenticationRepository.logInWithGoogle();
+
       var user = await currentUserRepo.readUserDocument();
 
-      if (user == null) return;
-      if (user['favoriteDrinks'] == null) {
+      if (user == null) {
+        currentUserRepo.creatUser(AppUser(
+            id: currentUserRepo.userNr?.id ?? '',
+            email: currentUserRepo.userNr?.email ?? '',
+            favoriteDrinks: []));
+      }
+      if (user!['favoriteDrinks'] == null) {
         user['favoriteDrinks'] = [];
         final userData = AppUser.fromJson(user);
         currentUserRepo.creatUser(userData);
       } else {
         currentUserRepo.creatUser(AppUser.fromJson(user));
       }
-
+      await currentUserRepo.getDrinksApiByFirestoreFavorite();
       emit(state.copyWith(status: FormzStatus.submissionSuccess));
     } on LogInWithGoogleFailure catch (e) {
       emit(

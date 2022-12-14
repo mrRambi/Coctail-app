@@ -16,7 +16,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:recipe_app/feature/favorite/bloc/cubit/favorite_drink_of_user_cubit.dart';
 import 'package:recipe_app/feature/login/bloc/bloc/authentication_bloc.dart';
 import 'package:recipe_app/feature/login/bloc/cubit/login_cubit.dart';
-import 'package:recipe_app/feature/login/view/widgets/login_form.dart';
 import 'package:recipe_app/feature/registration/cubit/sign_up_cubit.dart';
 
 import 'data/remote_data_sources/firebase_repo.dart';
@@ -37,17 +36,9 @@ Future<void> main() async {
   configureDependencies();
   await getIt.allReady();
 
-  final authenticationRepository = AuthenticationRepository();
-  await authenticationRepository.user.first;
-
   await dotenv.load(fileName: ".env");
 
-  final currentUserRepo = CurrentUserRepo(getIt());
-
-  runApp(MyApp(
-    authenticationRepository: authenticationRepository,
-    currentUserRepo: currentUserRepo,
-  ));
+  runApp(const MyApp());
 }
 
 class MyBlocObserver extends BlocObserver {
@@ -92,26 +83,19 @@ class MyBlocObserver extends BlocObserver {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp(
-      {Key? key,
-      required AuthenticationRepository authenticationRepository,
-      required CurrentUserRepo currentUserRepo})
-      : _authenticationRepository = authenticationRepository,
-        _currentUserRepo = currentUserRepo,
-        super(key: key);
+  const MyApp({
+    Key? key,
+  }) : super(key: key);
 
-  final AuthenticationRepository _authenticationRepository;
-
-  final CurrentUserRepo _currentUserRepo;
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider.value(
-          value: _authenticationRepository,
+        RepositoryProvider(
+          create: (context) => AuthenticationRepository(),
         ),
         RepositoryProvider(
-          create: (context) => CurrentUserRepo(getIt()),
+          create: (context) => CurrentUserRepo(getIt(), getIt()),
         ),
       ],
       child: MultiBlocProvider(
@@ -124,19 +108,18 @@ class MyApp extends StatelessWidget {
             ),
           ),
           BlocProvider(
-            create: (context) => AuthenticationBloc(_authenticationRepository),
+            create: (context) => AuthenticationBloc(getIt()),
           ),
           BlocProvider(
-            create: (context) => LoginCubit(_authenticationRepository, getIt()),
+            create: (context) => LoginCubit(getIt(), getIt()),
           ),
           BlocProvider(
-            create: (context) =>
-                SignUpCubit(_authenticationRepository, _currentUserRepo),
+            create: (context) => SignUpCubit(getIt(), getIt()),
           ),
           BlocProvider(
-            create: (context) =>
-                FavoriteDrinkOfUserCubit(getIt())..readFavorite(),
-          ),
+              lazy: false,
+              create: (context) =>
+                  FavoriteDrinkOfUserCubit(getIt())..getFavoriteByApi()),
           BlocProvider(
             create: (context) =>
                 UpdateCurrentUserDataCubit(getIt())..readUserColection(),
@@ -185,7 +168,6 @@ class _AppViewState extends State<AppView> {
 
   void _onItemTapped(int index) {
     setState(() {
-      context.read<FavoriteDrinkOfUserCubit>().getFavoriteByApi();
       _selectedIndex = index;
     });
     controller.animateToPage(index,
@@ -209,21 +191,9 @@ class _AppViewState extends State<AppView> {
         child: PageView(
           physics: const NeverScrollableScrollPhysics(),
           controller: controller,
-          children: <Widget>[
-            const DrinkScreen(),
-            Builder(builder: (context) {
-              return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                builder: (context, state) {
-                  return state.map(
-                      unknown: (_) => BlocProvider(
-                            create: (context) => AuthenticationBloc(getIt()),
-                            child: const LoginForm(),
-                          ),
-                      authenticated: (_) => const FavoriteScreen(),
-                      unauthenticated: (_) => const LoginForm());
-                },
-              );
-            }),
+          children: const <Widget>[
+            DrinkScreen(),
+            FavoriteScreen(),
           ],
         ),
       ),

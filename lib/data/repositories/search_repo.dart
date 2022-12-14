@@ -10,8 +10,8 @@ class SearchRepo {
     required this.drinkRepository,
   });
 
-  Future<List<Drink>> getDrinkSuggestions(String query) async {
-    List<Drink> list = await drinkRepository.searchDrinkByName(query);
+  Future<List<Drink?>?>? getDrinkSuggestions(String query) async {
+    List<Drink?>? list = await drinkRepository.searchDrinkByName(query);
     return list;
   }
 }

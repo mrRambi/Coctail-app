@@ -130,14 +130,11 @@ class LogOutFailure implements Exception {}
 
 @injectable
 class AuthenticationRepository {
-  AuthenticationRepository({
-    firebase_auth.FirebaseAuth? firebaseAuth,
-    GoogleSignIn? googleSignIn,
-  })  : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
-        _googleSignIn = googleSignIn ?? GoogleSignIn.standard();
+  AuthenticationRepository();
 
-  final firebase_auth.FirebaseAuth _firebaseAuth;
-  final GoogleSignIn _googleSignIn;
+  final firebase_auth.FirebaseAuth _firebaseAuth =
+      firebase_auth.FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn.standard();
 
   @visibleForTesting
   bool isWeb = kIsWeb;
@@ -145,7 +142,7 @@ class AuthenticationRepository {
   Stream<AppUser?> get user {
     return _firebaseAuth.authStateChanges().map((firebaseUser) {
       final user = firebaseUser?.toUser;
-      
+
       return user;
     });
   }
@@ -220,6 +217,9 @@ class AuthenticationRepository {
 
 extension on firebase_auth.User {
   AppUser get toUser {
-    return AppUser(id: uid, email: email ?? 'no email');
+    return AppUser(
+      id: uid,
+      email: email ?? 'no email',
+    );
   }
 }

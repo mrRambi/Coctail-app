@@ -20,21 +20,21 @@ mixin _$SearchDrinkState {
   TResult when<TResult extends Object?>({
     required TResult Function() searchedDrinkLoading,
     required TResult Function(String message) searchedDrinkLoadError,
-    required TResult Function(List<Drink> data) searchedDrinkLoadSuccess,
+    required TResult Function(List<Drink?>? data) searchedDrinkLoadSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? searchedDrinkLoading,
     TResult Function(String message)? searchedDrinkLoadError,
-    TResult Function(List<Drink> data)? searchedDrinkLoadSuccess,
+    TResult Function(List<Drink?>? data)? searchedDrinkLoadSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? searchedDrinkLoading,
     TResult Function(String message)? searchedDrinkLoadError,
-    TResult Function(List<Drink> data)? searchedDrinkLoadSuccess,
+    TResult Function(List<Drink?>? data)? searchedDrinkLoadSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -124,7 +124,7 @@ class _$_SearchedDrinkLoading implements _SearchedDrinkLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() searchedDrinkLoading,
     required TResult Function(String message) searchedDrinkLoadError,
-    required TResult Function(List<Drink> data) searchedDrinkLoadSuccess,
+    required TResult Function(List<Drink?>? data) searchedDrinkLoadSuccess,
   }) {
     return searchedDrinkLoading();
   }
@@ -134,7 +134,7 @@ class _$_SearchedDrinkLoading implements _SearchedDrinkLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? searchedDrinkLoading,
     TResult Function(String message)? searchedDrinkLoadError,
-    TResult Function(List<Drink> data)? searchedDrinkLoadSuccess,
+    TResult Function(List<Drink?>? data)? searchedDrinkLoadSuccess,
   }) {
     return searchedDrinkLoading?.call();
   }
@@ -144,7 +144,7 @@ class _$_SearchedDrinkLoading implements _SearchedDrinkLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? searchedDrinkLoading,
     TResult Function(String message)? searchedDrinkLoadError,
-    TResult Function(List<Drink> data)? searchedDrinkLoadSuccess,
+    TResult Function(List<Drink?>? data)? searchedDrinkLoadSuccess,
     required TResult orElse(),
   }) {
     if (searchedDrinkLoading != null) {
@@ -263,7 +263,7 @@ class _$_SearchedDrinkLoadError implements _SearchedDrinkLoadError {
   TResult when<TResult extends Object?>({
     required TResult Function() searchedDrinkLoading,
     required TResult Function(String message) searchedDrinkLoadError,
-    required TResult Function(List<Drink> data) searchedDrinkLoadSuccess,
+    required TResult Function(List<Drink?>? data) searchedDrinkLoadSuccess,
   }) {
     return searchedDrinkLoadError(message);
   }
@@ -273,7 +273,7 @@ class _$_SearchedDrinkLoadError implements _SearchedDrinkLoadError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? searchedDrinkLoading,
     TResult Function(String message)? searchedDrinkLoadError,
-    TResult Function(List<Drink> data)? searchedDrinkLoadSuccess,
+    TResult Function(List<Drink?>? data)? searchedDrinkLoadSuccess,
   }) {
     return searchedDrinkLoadError?.call(message);
   }
@@ -283,7 +283,7 @@ class _$_SearchedDrinkLoadError implements _SearchedDrinkLoadError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? searchedDrinkLoading,
     TResult Function(String message)? searchedDrinkLoadError,
-    TResult Function(List<Drink> data)? searchedDrinkLoadSuccess,
+    TResult Function(List<Drink?>? data)? searchedDrinkLoadSuccess,
     required TResult orElse(),
   }) {
     if (searchedDrinkLoadError != null) {
@@ -345,7 +345,7 @@ abstract class _$$_SearchedDrinkLoadSuccessCopyWith<$Res> {
           _$_SearchedDrinkLoadSuccess value,
           $Res Function(_$_SearchedDrinkLoadSuccess) then) =
       __$$_SearchedDrinkLoadSuccessCopyWithImpl<$Res>;
-  $Res call({List<Drink> data});
+  $Res call({List<Drink?>? data});
 }
 
 /// @nodoc
@@ -368,7 +368,7 @@ class __$$_SearchedDrinkLoadSuccessCopyWithImpl<$Res>
       data == freezed
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<Drink>,
+              as List<Drink?>?,
     ));
   }
 }
@@ -376,13 +376,15 @@ class __$$_SearchedDrinkLoadSuccessCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SearchedDrinkLoadSuccess implements _SearchedDrinkLoadSuccess {
-  const _$_SearchedDrinkLoadSuccess(final List<Drink> data) : _data = data;
+  const _$_SearchedDrinkLoadSuccess(final List<Drink?>? data) : _data = data;
 
-  final List<Drink> _data;
+  final List<Drink?>? _data;
   @override
-  List<Drink> get data {
+  List<Drink?>? get data {
+    final value = _data;
+    if (value == null) return null;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_data);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -413,7 +415,7 @@ class _$_SearchedDrinkLoadSuccess implements _SearchedDrinkLoadSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() searchedDrinkLoading,
     required TResult Function(String message) searchedDrinkLoadError,
-    required TResult Function(List<Drink> data) searchedDrinkLoadSuccess,
+    required TResult Function(List<Drink?>? data) searchedDrinkLoadSuccess,
   }) {
     return searchedDrinkLoadSuccess(data);
   }
@@ -423,7 +425,7 @@ class _$_SearchedDrinkLoadSuccess implements _SearchedDrinkLoadSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? searchedDrinkLoading,
     TResult Function(String message)? searchedDrinkLoadError,
-    TResult Function(List<Drink> data)? searchedDrinkLoadSuccess,
+    TResult Function(List<Drink?>? data)? searchedDrinkLoadSuccess,
   }) {
     return searchedDrinkLoadSuccess?.call(data);
   }
@@ -433,7 +435,7 @@ class _$_SearchedDrinkLoadSuccess implements _SearchedDrinkLoadSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? searchedDrinkLoading,
     TResult Function(String message)? searchedDrinkLoadError,
-    TResult Function(List<Drink> data)? searchedDrinkLoadSuccess,
+    TResult Function(List<Drink?>? data)? searchedDrinkLoadSuccess,
     required TResult orElse(),
   }) {
     if (searchedDrinkLoadSuccess != null) {
@@ -480,10 +482,10 @@ class _$_SearchedDrinkLoadSuccess implements _SearchedDrinkLoadSuccess {
 }
 
 abstract class _SearchedDrinkLoadSuccess implements SearchDrinkState {
-  const factory _SearchedDrinkLoadSuccess(final List<Drink> data) =
+  const factory _SearchedDrinkLoadSuccess(final List<Drink?>? data) =
       _$_SearchedDrinkLoadSuccess;
 
-  List<Drink> get data;
+  List<Drink?>? get data;
   @JsonKey(ignore: true)
   _$$_SearchedDrinkLoadSuccessCopyWith<_$_SearchedDrinkLoadSuccess>
       get copyWith => throw _privateConstructorUsedError;

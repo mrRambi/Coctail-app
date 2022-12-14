@@ -1,21 +1,36 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
+
 import 'package:injectable/injectable.dart';
 import 'package:recipe_app/data/repositories/models/app_user.dart';
 import 'package:recipe_app/data/repositories/models/drinks_model/drink.dart';
 import 'package:recipe_app/data/service/drink_service.dart';
 
+import 'firebase_repo.dart';
 import 'firestore_repo.dart';
 
 @injectable
 class CurrentUserRepo {
-  final User? user = FirebaseAuth.instance.currentUser;
-  final userId = FirebaseAuth.instance.currentUser?.uid;
+  final AuthenticationRepository authenticationRepository;
   final DataFireStoreRepo _dataFireStoreRepo;
   String usersCollection = 'users';
   final DrinkService _drinkService;
 
-  CurrentUserRepo(this._drinkService, {DataFireStoreRepo? dataFireStoreRepo})
-      : _dataFireStoreRepo = dataFireStoreRepo ?? DataFireStoreRepo();
+  CurrentUserRepo(this._drinkService, this.authenticationRepository,
+      {DataFireStoreRepo? dataFireStoreRepo})
+      : _dataFireStoreRepo = dataFireStoreRepo ?? DataFireStoreRepo() {
+    authenticationRepository.user.listen((user) {
+      setUser(user);
+    });
+  }
+
+  late final StreamSubscription<AppUser?> userSubscription;
+  late final StreamController<AppUser?> userController;
+
+  AppUser? userNr;
+
+  setUser(AppUser? user) {
+    userNr = user;
+  }
 
   Future<void> creatUser(AppUser data) async {
     try {
@@ -32,7 +47,7 @@ class CurrentUserRepo {
   Future<Map<String, dynamic>?> readUserDocument() async {
     return await _dataFireStoreRepo.readDocument(
       collectionName: usersCollection,
-      documentName: userId ?? 'no data',
+      documentName: userNr?.id ?? 'no data',
     );
   }
 
@@ -62,8 +77,14 @@ class CurrentUserRepo {
   Future<List<Drink>> getDrinksApiByFirestoreFavorite() async {
     final favoriteDrinks = await readUserDocument();
 
-    List listOfFavoriteDrinks = favoriteDrinks!['favoriteDrinks'] as List;
+    if (favoriteDrinks?['favoriteDrinks'] == null) {
+      return [];
+    }
+
+    List listOfFavoriteDrinks = favoriteDrinks?['favoriteDrinks'] as List;
+
     final l = listOfFavoriteDrinks.map((e) => e.toString()).toList();
+
     List<Drink>? listOfDrink = [];
     for (var i in l) {
       final listOfDrinkServiceItem =
@@ -97,7 +118,7 @@ class CurrentUserRepo {
   Future<void> updateFavoriteDrinksList(List<String> data) async {
     await _dataFireStoreRepo.updateCollectionField(
         collectionName: usersCollection,
-        docName: userId!,
+        docName: userNr?.id ?? '',
         parameters: {'favoriteDrinks': data});
   }
 }

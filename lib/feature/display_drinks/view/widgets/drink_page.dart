@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../data/repositories/models/app_user.dart';
 import '../../../../data/repositories/models/drinks_model/drink.dart';
 import '../../../../utils/const.dart';
 import '../../../login/bloc/bloc/authentication_bloc.dart';
@@ -15,196 +16,199 @@ class DrinkPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var ing = drink.measureProperties().toList();
     var meas = drink.ingriedientProperties().toList();
-    return Scaffold(
-      backgroundColor: Colors.black54,
-      extendBody: true,
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.black, Color(0xFF0b0130), Color(0xFF190957)],
+    return SafeArea(
+      top: true,
+      bottom: true,
+      child: Scaffold(
+        backgroundColor: Colors.black54,
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.black, Color(0xFF0b0130), Color(0xFF190957)],
+            ),
           ),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  image: DecorationImage(
-                    image:
-                        NetworkImage(drink.strDrinkThumb ?? linkDrinkPicture),
-                  ),
-                ),
-                width: double.infinity,
-                height: 400,
-                child: Stack(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.arrow_back,
-                              size: 30,
-                            ),
-                            onPressed: () => Navigator.pop(context),
-                          )),
+          child: SizedBox(
+            child: ListView(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    image: DecorationImage(
+                      image:
+                          NetworkImage(drink.strDrinkThumb ?? linkDrinkPicture),
                     ),
-                    Align(
-                        alignment: Alignment.bottomRight,
-                        child: BlocBuilder<AuthenticationBloc,
-                            AuthenticationState>(
-                          builder: (context, state) {
-                            return state.map(
-                              unknown: (_) => const SizedBox(),
-                              unauthenticated: (_) => const SizedBox(),
-                              authenticated: (_) => BlocBuilder<
-                                  UpdateCurrentUserDataCubit,
-                                  UpdateCurrentUserDataState>(
-                                builder: (context, state) {
-                                  return state.when(
-                                    currentUserDataLoading: () => IconButton(
-                                        onPressed: () {},
-                                        icon: const Icon(
-                                          Icons.favorite_outline,
-                                          size: 30,
-                                        ),
-                                        color: Colors.white,
-                                        iconSize: 30),
-                                    currentUserDataError: (e) => Text(e),
-                                    currentUserDataLoadSuccess: (value) =>
-                                        SizedBox(
-                                      child: (!value.contains(
-                                              drink.idDrink.toString()))
-                                          ? IconButton(
-                                              onPressed: () {
-                                                context
-                                                    .read<
-                                                        UpdateCurrentUserDataCubit>()
-                                                    .addFavorite(drink.idDrink
-                                                        .toString());
-                                              },
-                                              icon: const Icon(
-                                                Icons.favorite_outline,
-                                                size: 30,
-                                              ),
-                                              color: Colors.white,
-                                              iconSize: 30,
-                                            )
-                                          : IconButton(
-                                              onPressed: () {
-                                                context
-                                                    .read<
-                                                        UpdateCurrentUserDataCubit>()
-                                                    .removeFavorite(drink
-                                                        .idDrink
-                                                        .toString());
-                                              },
-                                              icon: const Icon(
-                                                Icons.favorite,
-                                                size: 30,
-                                              ),
-                                              color: Colors.white,
-                                              iconSize: 30,
-                                            ),
-                                    ),
-                                  );
-                                },
+                  ),
+                  width: double.infinity,
+                  height: 400,
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
+                            child: IconButton(
+                              icon: const Icon(
+                                Icons.arrow_back,
+                                size: 30,
                               ),
-                            );
-                          },
-                        )),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              SizedBox(
-                child: Text(
-                  drink.strDrink ?? 'drinkname',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
+                              onPressed: () => Navigator.pop(context),
+                            )),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: StreamBuilder<AppUser?>(
+                            stream:
+                                context.watch<AuthenticationBloc>().isLoged(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData && snapshot.data != null) {
+                                return FavoriteIconButton(
+                                  isChecked: true,
+                                  drink: drink,
+                                );
+                              } else {
+                                return const SizedBox();
+                              }
+                            }),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                width: 340,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      child: Text(
+                const SizedBox(
+                  height: 5,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    drink.strDrink ?? 'drinkname',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Text(
                         'Category: ',
                         style: TextStyle(
                           color: Colors.amberAccent,
                           fontSize: 20,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      child: Text(
+                      Text(
                         drink.strAlcoholic ?? '',
                         style: const TextStyle(
                           color: Colors.amberAccent,
                           fontSize: 20,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                width: 340,
-                child: Text(
-                  drink.strInstructions ?? '',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+                    ],
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 120,
-                width: 340,
-                child: ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: meas.length,
-                  itemBuilder: (context, index) {
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    drink.strInstructions ?? '',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                ...List.generate(
+                
+                  ing.length,
+                  (index) {
                     final measurence = meas[index];
                     final ingredience = ing[index];
                     final isIngNull = measurence == null || ingredience == null;
 
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (!isIngNull)
-                          Text(
-                            "$ingredience - $measurence",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (!isIngNull)
+                            Text(
+                              "$ingredience - $measurence",
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
                             ),
-                          ),
-                        if (isIngNull) const SizedBox(),
-                      ],
+                          if (isIngNull) const SizedBox(),
+                        ],
+                      ),
                     );
                   },
-                ),
-              ),
-            ],
+                ).toList(),
+                const SizedBox(
+                  height: 30,
+                )
+              ],
+            ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class FavoriteIconButton extends StatelessWidget {
+  const FavoriteIconButton({
+    Key? key,
+    required this.isChecked,
+    required this.drink,
+  }) : super(key: key);
+  final bool isChecked;
+  final Drink? drink;
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<UpdateCurrentUserDataCubit, UpdateCurrentUserDataState>(
+      builder: (context, state) {
+        return state.when(
+          currentUserDataLoading: () => const IconButton(
+              onPressed: null,
+              icon:
+                  Icon(Icons.favorite_outline, color: Colors.white, size: 30)),
+          currentUserDataError: (_) => const IconButton(
+            onPressed: null,
+            icon: Icon(Icons.favorite_outline, color: Colors.white, size: 30),
+          ),
+          currentUserDataLoadSuccess: (data) =>
+              !data.contains(drink?.idDrink.toString())
+                  ? IconButton(
+                      onPressed: () {
+                        context
+                            .read<UpdateCurrentUserDataCubit>()
+                            .addFavorite(drink?.idDrink ?? '');
+                      },
+                      icon: const Icon(Icons.favorite_outline),
+                      color: Colors.white,
+                      iconSize: 30,
+                    )
+                  : IconButton(
+                      onPressed: () {
+                        context
+                            .read<UpdateCurrentUserDataCubit>()
+                            .removeFavorite(drink?.idDrink ?? '');
+                      },
+                      icon: const Icon(Icons.favorite),
+                      color: Colors.white,
+                      iconSize: 30,
+                    ),
+        );
+      },
     );
   }
 }

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recipe_app/utils/extensions.dart';
 
+import '../../../../data/repositories/models/app_user.dart';
 import '../../../../utils/const.dart';
 import '../../../login/bloc/bloc/authentication_bloc.dart';
-import '../../../update_firestore_data.dart/cubit/update_current_user_data_cubit.dart';
 import '../../cubit/drink_cubit.dart';
+import 'drink_page.dart';
 
 class InfoDialog extends StatelessWidget {
   const InfoDialog({
@@ -74,73 +75,21 @@ class InfoDialog extends StatelessWidget {
                             children: [
                               Align(
                                 alignment: Alignment.topRight,
-                                child: BlocBuilder<AuthenticationBloc,
-                                    AuthenticationState>(
-                                  builder: (context, state) {
-                                    return state.map(
-                                      unknown: (_) => const SizedBox(),
-                                      unauthenticated: (_) => const SizedBox(),
-                                      authenticated: (_) => BlocBuilder<
-                                          UpdateCurrentUserDataCubit,
-                                          UpdateCurrentUserDataState>(
-                                        builder: (context, state) {
-                                          return state.when(
-                                            currentUserDataLoading: () =>
-                                                IconButton(
-                                                    onPressed: () {},
-                                                    icon: const Icon(
-                                                      Icons.favorite_outline,
-                                                      size: 22,
-                                                    ),
-                                                    color: Colors.white,
-                                                    iconSize: 18),
-                                            currentUserDataError: (e) =>
-                                                Text(e),
-                                            currentUserDataLoadSuccess:
-                                                (value) => SizedBox(
-                                              child: (!value.contains(data[0]
-                                                      .idDrink
-                                                      .toString()))
-                                                  ? IconButton(
-                                                      onPressed: () {
-                                                        context
-                                                            .read<
-                                                                UpdateCurrentUserDataCubit>()
-                                                            .addFavorite(data[0]
-                                                                .idDrink
-                                                                .toString());
-                                                      },
-                                                      icon: const Icon(
-                                                        Icons.favorite_outline,
-                                                        size: 20,
-                                                      ),
-                                                      color: Colors.white,
-                                                      iconSize: 20,
-                                                    )
-                                                  : IconButton(
-                                                      onPressed: () {
-                                                        context
-                                                            .read<
-                                                                UpdateCurrentUserDataCubit>()
-                                                            .removeFavorite(
-                                                                data[0]
-                                                                    .idDrink
-                                                                    .toString());
-                                                      },
-                                                      icon: const Icon(
-                                                        Icons.favorite,
-                                                        size: 20,
-                                                      ),
-                                                      color: Colors.white,
-                                                      iconSize: 20,
-                                                    ),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  },
-                                ),
+                                child: StreamBuilder<AppUser?>(
+                                    stream: context
+                                        .watch<AuthenticationBloc>()
+                                        .isLoged(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData &&
+                                          snapshot.data != null) {
+                                        return FavoriteIconButton(
+                                          isChecked: false,
+                                          drink: data.first,
+                                        );
+                                      } else {
+                                        return const SizedBox();
+                                      }
+                                    }),
                               )
                             ],
                           ),
