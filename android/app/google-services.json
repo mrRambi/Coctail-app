@@ -1,33 +1,49 @@
 {
   "project_info": {
-    "project_number": "526473554718",
-    "project_id": "coctail-app-15865",
-    "storage_bucket": "coctail-app-15865.appspot.com"
+    "project_number": "230097529563",
+    "project_id": "cocktail-explorer",
+    "storage_bucket": "cocktail-explorer.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:526473554718:android:44e47f93510e031710b70f",
+        "mobilesdk_app_id": "1:230097529563:android:41261d7dcc380942193afe",
         "android_client_info": {
-          "package_name": "com.example.recipe_app"
+          "package_name": "com.maciejbeska.cocktail_explorer_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "526473554718-icps0iq5p8pbg5rov6b1a5ovd885k04d.apps.googleusercontent.com",
+          "client_id": "230097529563-1tg3iqkpgsn1qpbtgnupkh6u3f2jvt1q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maciejbeska.cocktail_explorer_app",
+            "certificate_hash": "0939bebf9da3e0a8bfdcd34a29a3b5509174e6c6"
+          }
+        },
+        {
+          "client_id": "230097529563-rp868lo6m1t2042jrgmm6r310tf83ob4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maciejbeska.cocktail_explorer_app",
+            "certificate_hash": "f5817d4d315f17c526d1a07b76b83a5c254089c0"
+          }
+        },
+        {
+          "client_id": "230097529563-7sl1hd60907fi6q6ff702fo271ae9lq0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDF1_yA5VJt-zUopKfwkxqHPQddwDECI2c"
+          "current_key": "AIzaSyClmzTbnGtkh4HBcdTO01KHbvi4fQskFog"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "526473554718-icps0iq5p8pbg5rov6b1a5ovd885k04d.apps.googleusercontent.com",
+              "client_id": "230097529563-7sl1hd60907fi6q6ff702fo271ae9lq0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

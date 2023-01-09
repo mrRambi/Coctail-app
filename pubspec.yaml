@@ -15,7 +15,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.0.1+1
 
 environment:
   sdk: ">=2.17.6 <3.0.0"
@@ -27,40 +27,37 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  flutter:
-    sdk: flutter
-
-  flutter_localizations:
-    sdk: flutter
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  freezed_annotation: ^2.1.0
-  json_annotation: ^4.6.0
-  bloc: ^8.1.0
-  flutter_bloc: ^8.1.1
-  http: ^0.13.5
-  flutter_dotenv: ^5.0.2
-  intl: ^0.17.0
-  injectable: ^1.5.3
-  injectable_generator: ^1.5.4
-  get_it: ^7.2.0
   auth: ^8.1.0
+  bloc: ^8.1.0
+  cloud_firestore: ^3.4.6
+  cupertino_icons: ^1.0.2
   firebase_auth: ^3.7.0
   firebase_core: ^1.21.1
-  meta: ^1.7.0
-  google_sign_in: ^5.4.1
-  formz: ^0.4.1
-  form_input: ^0.1.1
-  font_awesome_flutter: ^10.1.0
-  cloud_firestore: ^3.4.6
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.1
+  flutter_dotenv: ^5.0.2
+  flutter_launcher_icons: ^0.11.0
+  flutter_localizations:
+    sdk: flutter
+  flutter_svg: ^1.1.6
   flutter_typeahead: ^4.1.1
+  font_awesome_flutter: ^10.1.0
+  form_input: ^0.1.1
+  formz: ^0.4.1
+  freezed_annotation: ^2.1.0
+  get_it: ^7.2.0
   google_fonts: ^3.0.1
+  google_sign_in: ^5.4.1
+  http: ^0.13.5
+  injectable: ^1.5.3
+  injectable_generator: ^1.5.4
+  intl: ^0.17.0
+  json_annotation: ^4.6.0
+  meta: ^1.7.0
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  build_runner: ^2.2.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -68,13 +65,31 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
-  build_runner: ^2.2.0
+  flutter_test:
+    sdk: flutter
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "lib/assets/app_logo.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "lib/assets/app_logo.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "lib/assets/app_logo.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "lib/assets/app_logo.png"
   freezed: ^2.1.0+1
   json_serializable: ^6.3.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter packages.
 flutter:
   # The following line ensures that the Material Icons font is
@@ -86,15 +101,12 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - .env
-  #   - images/a_dot_burr.jpeg
+    - lib/assets/cube.svg
   #   - images/a_dot_ham.jpeg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

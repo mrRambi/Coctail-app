@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_app/feature/display_drinks/view/widgets/info_dialog.dart';
 import 'package:recipe_app/feature/search/view/cubit/search_drink_cubit.dart';
@@ -63,19 +64,19 @@ class CustomFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      foregroundColor: Colors.orange[500],
-      backgroundColor: Colors.black,
-      onPressed: () async {
-        context.read<DrinkCubit>().fetchDrinks();
+        foregroundColor: Colors.orange[500],
+        backgroundColor: Colors.black,
+        onPressed: () async {
+          context.read<DrinkCubit>().fetchDrinks();
 
-        await showDialog(
-            context: context,
-            builder: (BuildContext context) => const InfoDialog());
-      },
-      child: const Icon(
-        Icons.add,
-        size: 35,
-      ),
-    );
+          await showDialog(
+              context: context,
+              builder: (BuildContext context) => const InfoDialog());
+        },
+        child: SvgPicture.asset(
+          'lib/assets/cube.svg',
+          color: Colors.amber[800],
+          height: 40,
+        ));
   }
 }
